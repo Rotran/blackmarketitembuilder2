@@ -1,63 +1,106 @@
-var databaseUrl = "blackmarketdb";
-var collections = ["items"];
+(function () {
 
-var mongojs = require("mongojs");
-var db = mongojs(databaseUrl);
+    var allDirectives = {};
 
-var itemCollection = db.collection("items");
+    //other functions
+    allDirectives.function1 = function () {
+        console.log("I WAS CALLED");
+    };
 
-/*this is how to save to mongo db*/
-//itemCollection.save({
-//    _id: 1,
-//    name: "testItem",
-//    stat: {
-//        ap: 2,
-//        ad: 3
-//    }
-//}, function (err, saved) {
-//    if (err || !saved) {
-//        console.log("SAVE FAILED");
-//    } else {
-//        console.log("SAVE SUCCESS");
-//    }
-//});
+    var databaseUrl = "blackmarketdb";
+    var collections = ["items"];
 
-/*This is how to find in mongodb*/
-itemCollection.find({
-    id: 3165
-}, function (err, docs) {
-    console.log(docs);
-    db.close();
-});
+    var mongojs = require("mongojs");
+    var db = mongojs(databaseUrl);
 
-/*Deleting an entity from mongodb*/
-//itemCollection.drop({name:"testItem"}, function (err, sucess) {
-//    if (err || !saved) {
-//        console.log("SAVE FAILED");
-//    } else {
-//        console.log("SAVE SUCCESS");
-//    }
-//})
-//var request = require("request");
+    var itemCollection = db.collection("items");
 
-//request.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?itemListData=all&api_key=", function (data, response, body) {
-//
-//    var items = JSON.parse(body);
-//    var parsedItems = items.data;
-//    var length = 0;
-//    for (var key in parsedItems) {
-//        (function (i) {
-//            itemCollection.save(i,
-//                function (err, saved) {
-//                    if (err || !saved) {
-//                        console.log("SAVE FAILED");
-//                    } else {
-//                        console.log("SAVE SUCCESS");
-//                    }
-//                });
-//        })(parsedItems[key]);
-//    }
-//    console.log(length);
-//}).on("error", function (e) {
-//    console.log("Got error, " + e.message);
-//});
+    /*this is how to save to mongo db*/
+    allDirectives.saveItem = function (params) {
+        if (params != undefined) {
+            itemCollection.save({
+                _id: 1,
+                name: "testItem",
+                stat: {
+                    ap: 2,
+                    ad: 3
+                }
+            }, function (err, saved) {
+                if (err || !saved) {
+                    console.log("SAVE FAILED");
+                } else {
+                    console.log("SAVE SUCCESS");
+                }
+            });
+        }
+    };
+
+
+    allDirectives.testFind = function () {
+
+        /*This is how to find in mongodb*/
+        itemCollection.find({
+            id: 3165
+        }, function (err, docs) {
+            console.log(docs);
+            db.close();
+        });
+    };
+
+
+    /*Deleting an entity from mongodb*/
+    allDirectives.deleteItem = function (params) {
+        if (params != undefined) {
+            itemCollection.drop({
+                name: "testItem"
+            }, function (err, sucess) {
+                if (err || !saved) {
+                    console.log("SAVE FAILED");
+                } else {
+                    console.log("SAVE SUCCESS");
+                }
+            });
+        }
+    };
+
+    allDirectives.populateMongo = function () {
+        var request = require("request");
+        request.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?itemListData=all&api_key=", function (data, response, body) {
+
+            var items = JSON.parse(body);
+            var parsedItems = items.data;
+            var length = 0;
+            for (var key in parsedItems) {
+                (function (i) {
+                    itemCollection.save(i,
+                        function (err, saved) {
+                            if (err || !saved) {
+                                console.log("SAVE FAILED");
+                            } else {
+                                console.log("SAVE SUCCESS");
+                            }
+                        });
+                })(parsedItems[key]);
+            }
+            console.log(length);
+        }).on("error", function (e) {
+            console.log("Got error, " + e.message);
+        });
+
+    };
+
+    //ACTUAL DIRECTIVE RUNNING.
+    var argCheck = process.argv.length > 3 ? 0 : 1;
+
+    if (!argCheck) {
+        console.error("To many arguments.");
+    } else {
+        var directive = process.argv[2];
+        if (allDirectives[directive] != undefined) {
+            allDirectives[directive]();
+        } else {
+            console.error("No directive mapped to command.");
+        }
+    }
+
+})();

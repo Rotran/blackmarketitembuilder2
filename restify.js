@@ -9,7 +9,7 @@ function respond(req, res, next) {
     next();
 }
 
-function blackMarketItem(req, res, next) {
+function fetchItemById(req, res, next) {
     var id = req.params.id;
 
     itemCollection.find({
@@ -21,7 +21,18 @@ function blackMarketItem(req, res, next) {
         res.end(JSON.stringify(response[0]));
     });
     return next();
+}
 
+function fetchAllItems(req, res, next) {
+    itemCollection.find(function (err, data) {
+        var allItems = JSON.stringify(data);
+
+        res.writeHead(200, {
+            'Content-Type': 'application/json; charset=utf-8'
+        });
+        res.end(allItems);
+        return next();
+    });
 }
 
 var server = restify.createServer();
@@ -30,7 +41,8 @@ server.use(restify.queryParser());
 server.use(restify.bodyParser());
 
 server.get('/hello/:name', respond);
-server.get('/blackmarket/:id', blackMarketItem);
+server.get('/fetchItemById/:id', fetchItemById);
+server.get('/fetchAllItems', fetchAllItems);
 server.head('/hello/:name', respond);
 
 server.listen(8080, function () {
