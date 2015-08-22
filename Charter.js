@@ -30,16 +30,20 @@ var simpleData = {
     ]
 };
 
-$(function () {
+(function () {
 
-    Item = Backbone.Model.extend({
+    var Item = Backbone.Model.extend({
         //Create a model to hold friend atribute
         name: null,
         ap: null,
-        ad: null
+        ad: null,
+        id: 0,
+        url: 'http://localhost:8080/fetchItemById'
     });
 
-    Items = Backbone.Collection.extend({
+    return Item;
+
+    var Items = Backbone.Collection.extend({
         //This is our Friends collection and holds our Friend models
         initialize: function (models, options) {
             this.bind("add", options.view.addItemLi);
@@ -47,7 +51,7 @@ $(function () {
         }
     });
 
-    AppView = Backbone.View.extend({
+    var AppView = Backbone.View.extend({
         el: $("body"),
         initialize: function () {
             this.items = new Items(null, {
@@ -84,4 +88,4 @@ $(function () {
 
     var appview = new AppView;
 
-});
+})();
