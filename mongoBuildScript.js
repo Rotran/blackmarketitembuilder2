@@ -63,6 +63,7 @@
         }
     };
 
+    //need to pass in key
     allDirectives.populateMongo = function () {
         var request = require("request");
         request.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?itemListData=all&api_key=", function (data, response, body) {
