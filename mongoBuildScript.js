@@ -64,9 +64,9 @@
     };
 
     //need to pass in key
-    allDirectives.populateMongo = function () {
+    allDirectives.populateMongo = function (key) {
         var request = require("request");
-        request.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?itemListData=all&api_key=", function (data, response, body) {
+        request.get("https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?itemListData=all&api_key="+key, function (data, response, body) {
 
             var items = JSON.parse(body);
             var parsedItems = items.data;
@@ -91,12 +91,16 @@
     };
 
     //ACTUAL DIRECTIVE RUNNING.
-    var argCheck = process.argv.length > 3 ? 0 : 1;
+    var argCheck = process.argv.length > 4 ? 0 : 1;
 
     if (!argCheck) {
         console.error("To many arguments.");
     } else {
         var directive = process.argv[2];
+        var key = process.argv[3];
+        if (typeof key != undefined){
+            allDirectives[directive](key);
+        }
         if (allDirectives[directive] != undefined) {
             allDirectives[directive]();
         } else {
