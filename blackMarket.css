@@ -1,9 +1,31 @@
 body {
-    margin: 0
+    margin: 0;
 }
 .ui-accordion .ui-accordion-content {
-    padding: 0px
+    padding: 0px;
 }
 ul {
-    list-style-type:none
+    list-style-type: none;
+}
+.item-selection {
+    min-width: 500px;
+    max-width: 500px;
+    min-height: 100%;
+}
+.item-filter .item-result {
+    min-width: 250px;
+    min-height: 100%;
+}
+.item-filter {
+    float: left;
+}
+.item-result {
+    background-color: rebeccapurple
+}
+.statistics {
+    float: right;
+    min-width: 1280px;
+    max-width: 1280px;
+    min-height: 100%;
+    background-color: red;
 }
