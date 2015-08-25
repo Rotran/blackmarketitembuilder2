@@ -15,7 +15,8 @@ $(document).ready(function () {
     //Not sure this one does anything usefull, just took off what I had in orionhub
     var mynewChart = new Chart(ctx);
     // this is most likely the chart that should be one that is viewed, since it has data...
-    var lineChart = Chart(ctx).Line(orionData, {
+    console.log(data);
+    var lineChart = new Chart(ctx).Line(data, {
         bezierCurve: true
     });
 });
