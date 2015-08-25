@@ -27,7 +27,7 @@ ul {
     min-width: 1280px;
     max-width: 1280px;
     min-height: 100%;
-    background-color: red;
+    background-color: darkgray;
 }
 canvas{
     background-color: black;
