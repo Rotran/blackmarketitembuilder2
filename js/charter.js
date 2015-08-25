@@ -69,18 +69,20 @@ var simpleData = {
             label: "AD",
             fillColor: "rgba(244, 0, 0, 1)",
             strokeColor: "rgba(244, 0, 0, 1)",
-            pointColor: "rgba(244, 0, 0, 1)"
+            pointColor: "rgba(244, 0, 0, 1)",
+            data: [20, 30, 40, 50, 60]
         },
         {
             label: "AP",
             fillColor: "rgba(177, 71, 255, 1)",
             strokeColor: "rgba(177, 71, 255, 1)",
-            pointColor: "rgba(177, 71, 255, 1)"
+            pointColor: "rgba(177, 71, 255, 1)",
+            data: [5, 10, 15, 20, 25]
         },
     ]
 };
 
-var data = {
+var orionData = {
     labels: ["January", "February", "March", "April", "May", "June", "July"],
     datasets: [
         {
@@ -91,7 +93,8 @@ var data = {
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(220,220,220,1)",
-            data: [65, 59, 80, 81, 56, 55, 40]
+            data: [65, 59, 80, 81, 56, 55, 40] //these datapoints will have to be vars
+            //They could be based on the view collection of items we have first one second...
         },
         {
             label: "My Second dataset",

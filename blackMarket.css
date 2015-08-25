@@ -29,3 +29,6 @@ ul {
     min-height: 100%;
     background-color: red;
 }
+canvas{
+    background-color: black;
+}

@@ -1,3 +1,4 @@
+/*globals Chart */
 $(document).ready(function () {
     console.log("doc ready!");
     $("#filter").load("templates/filter.html", function () {
@@ -9,13 +10,19 @@ $(document).ready(function () {
     console.log("Loading up our items");
 
     console.log("Creating the charts!");
-    var ctx = $("#firstChart")[0].getContext("2d");
+    var ctx = $("#firstChart").get(0).getContext("2d");
     console.log(ctx);
 
-    //Not sure this one does anything usefull, just took off what I had in orionhub
-    var mynewChart = new Chart(ctx);
-    // this is most likely the chart that should be one that is viewed, since it has data...
-    var lineChart = Chart(ctx).Line(orionData, {
-        bezierCurve: true
-    });
+    // First chart
+    var lineChart = new Chart(ctx).Line(orionData);
+    var ctx = $("#secondChart").get(0).getContext("2d");
+    var lineChart2 = new Chart(ctx).Line(simpleData);
+
+
+    //chart defaults:
+
+    Chart.defaults.global = {
+        showScale: true,
+        scaleFontColor: "#555"
+    };
 });
