@@ -1,5 +1,20 @@
 /*globals Chart */
 $(document).ready(function () {
+
+
+
+    var itemCollections = new ItemCollection();
+    var allItems = [];
+
+    itemCollections.fetch({
+        success: function (models, response, options) {
+            console.log("MODELS", models);
+            allItems = models.models;
+            $("#item-result").itemResults({allItems : allItems});
+            $(document).trigger("all-items-loaded");
+        }
+    });
+
     console.log("doc ready!");
     $("#filter").load("templates/filter.html", function () {
         $("#filter-accordion").accordion({

@@ -20,7 +20,7 @@ ul {
     float: left;
 }
 .item-result {
-    background-color: rebeccapurple
+    background-color: rebeccapurple;
 }
 .statistics {
     float: right;
@@ -30,10 +30,14 @@ ul {
     background-color: darkgray;
     opacity: .7;
 }
-.items-selected{
+.items-selected {
     background-color: darkgray;
     opacity: .5;
 }
-canvas{
+canvas {
     background-color: black;
+}
+.item-result-list {
+    overflow: scroll;
+    max-height: 400px;
 }

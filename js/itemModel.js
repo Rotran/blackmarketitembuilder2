@@ -14,3 +14,4 @@ var ItemCollection = Backbone.Collection.extend({
     model : ItemModel,
     url : 'http://localhost:8080/fetchAllItems'
 });
+
