@@ -37,3 +37,7 @@ ul {
 canvas{
     background-color: black;
 }
+#item-drop{
+    width: 200px;
+    float: left;
+}
