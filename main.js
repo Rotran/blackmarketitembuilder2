@@ -22,6 +22,21 @@ $(document).ready(function () {
         });
     });
 
+    $("#drop-items").load("templates/dropped.html", function(){
+        $("#startGame").droppable({
+            activeClass: "ui-state-default",
+			hoverClass: "ui-state-hover",
+			accept: ":not(.ui-sortable-helper)",
+			drop: function( event, ui ) {
+				$( this ).find( ".placeholder" ).remove();
+				$( "<li></li>" ).text( ui.draggable.text() ).appendTo( this );
+            //TODO: after we drop, we should add the item
+            // to the list, then reset the dragged item
+            // to make it look like it snapped in
+        }
+        });
+    });
+
     console.log("Loading up our items");
 
     console.log("Creating the charts!");

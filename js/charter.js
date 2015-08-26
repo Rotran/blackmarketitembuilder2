@@ -148,4 +148,7 @@ function lineChartDefData(){
     return datasets;
 }
 
+var lineChartDmg;
+var lineChartDef;
+
 var appview = new AppView;
