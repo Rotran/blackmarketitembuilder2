@@ -123,4 +123,29 @@ var MyChartView = Backbone.View.extend({
 
 });
 
+// Users will be dropping items into an area and moving them around
+// After each drop, this function should be called to re-do the chart
+// The given charts will need to be defined globaly for this to work
+// After each drop we can just go through and do all the charts for simplicity
+function generateDataFromDrop(){
+
+    lineChartDmgData();
+    lineChartDmgData();
+    //Now need to call update!
+
+}
+
+// Charts:
+function lineChartDmgData(){
+    var datasets = [];
+    //Change the datasets
+    //Will returning update? probs not...
+    return datasets;
+}
+function lineChartDefData(){
+    var datasets = [];
+    //Change stuff
+    return datasets;
+}
+
 var appview = new AppView;

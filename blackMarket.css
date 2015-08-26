@@ -28,7 +28,7 @@ ul {
     max-width: 1280px;
     min-height: 100%;
     background-color: darkgray;
-    opacity: .5;
+    opacity: .7;
 }
 .items-selected{
     background-color: darkgray;
@@ -36,5 +36,4 @@ ul {
 }
 canvas{
     background-color: black;
-    opacity: 1;
 }
