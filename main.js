@@ -33,7 +33,33 @@ $(document).ready(function () {
             //TODO: after we drop, we should add the item
             // to the list, then reset the dragged item
             // to make it look like it snapped in
-        }
+            }
+        });
+        //midGame
+        $("#midGame").droppable({
+            activeClass: "ui-state-default",
+			hoverClass: "ui-state-hover",
+			accept: ":not(.ui-sortable-helper)",
+			drop: function( event, ui ) {
+				$( this ).find( ".placeholder" ).remove();
+				$( "<li></li>" ).text( ui.draggable.text() ).appendTo( this );
+            //TODO: after we drop, we should add the item
+            // to the list, then reset the dragged item
+            // to make it look like it snapped in
+            }
+        });
+        //endGame
+        $("#endGame").droppable({
+            activeClass: "ui-state-default",
+			hoverClass: "ui-state-hover",
+			accept: ":not(.ui-sortable-helper)",
+			drop: function( event, ui ) {
+				$( this ).find( ".placeholder" ).remove();
+				$( "<li></li>" ).text( ui.draggable.text() ).appendTo( this );
+            //TODO: after we drop, we should add the item
+            // to the list, then reset the dragged item
+            // to make it look like it snapped in
+            }
         });
     });
 
