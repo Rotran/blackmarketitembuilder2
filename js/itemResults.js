@@ -38,9 +38,8 @@ $(function () {
                     var itemAttr = item.attributes;
                     var inTag = false;
                     if(itemAttr.tags != undefined){
-                        console.log("Tags not undefined")
                         for(var t = 0; t < itemAttr.tags.length; t++){
-                            if(itemAttr.tags[t].toLowerCase().indexOf(searchText.toLowerCase()) > -1 && itemAttr.tags[t].length < 6 ){
+                            if(itemAttr.tags[t].toLowerCase().indexOf(searchText.toLowerCase()) > -1 && itemAttr.tags[t].length < searchText.length +1 ){
                                 inTag = true;
                                 console.log(itemAttr.name+" found it tag:" + itemAttr.tags[t].toLowerCase());
                                 break;
@@ -49,9 +48,6 @@ $(function () {
                             }
                         }
                     }
-                    console.log("RESULTS");
-                    console.log(inTag);
-                    console.log((itemAttr.name.toLowerCase().indexOf(searchText) > -1) || inTag);
                     return (itemAttr.name.toLowerCase().indexOf(searchText) > -1) || inTag;
                 });
 
