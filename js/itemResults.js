@@ -31,27 +31,29 @@ $(function () {
         getCurrentItems: function () {
             return this._filterDisplayItems;
         },
-        filterDisplayItems: function (searchText) {
+        searchDisplayItems: function (searchText) {
             if (searchText != undefined) {
                 //set filtered items to have only what contains the text string
-                var filteredItems = _.filter(this.options.allItems, function (item) {
+                var searchedItems = _.filter(this.options.allItems, function (item) {
                     var itemAttr = item.attributes;
                     var inTag = false;
-                    if(itemAttr.tags != undefined){
-                        for(var t = 0; t < itemAttr.tags.length; t++){
-                            if(itemAttr.tags[t].toLowerCase().indexOf(searchText.toLowerCase()) > -1 && itemAttr.tags[t].length < searchText.length +1 ){
+                    //We're going to allow searching my popular tags
+                    if (itemAttr.tags != undefined) {
+                        for (var t = 0; t < itemAttr.tags.length; t++) {
+                            //we do a +2 here to cheat and include boot == boots but exclude pretty much
+                            // all the other unwanted cases of contaiment i.e: boot != nonBOOTsmovement
+                            if (itemAttr.tags[t].toLowerCase().indexOf(searchText.toLowerCase()) > -1 && itemAttr.tags[t].length < searchText.length + 2) {
                                 inTag = true;
-                                console.log(itemAttr.name+" found it tag:" + itemAttr.tags[t].toLowerCase());
                                 break;
-                            }else{
-                                console.log(itemAttr.tags[t].toLowerCase());
                             }
                         }
                     }
+                    //For the search we will return if the name contains the searchString or
+                    // if the tag matches the search string exactlyish according to the comment above
                     return (itemAttr.name.toLowerCase().indexOf(searchText) > -1) || inTag;
                 });
 
-                this._filteredItems = filteredItems;
+                this._filteredItems = searchedItems;
                 //clear out the current list and populate with the one
                 $("#item-result-list").empty();
                 this._createList();
@@ -62,6 +64,35 @@ $(function () {
                 $("#item-result-list").empty();
                 this._createList();
             }
+        },
+        filterDisplayItems: function (filterTags) {
+            //we will recieve a list of filter Tags and then iterate through all
+            //items and see which tags are totally contained
+
+            //set the default to all items
+            var filteredItems = this.options.allItems;
+            if (filterTags != undefined) {
+                filteredItems = _.filter(this.options.allItems, function (item) {
+                    var itemAttr = item.attributes;
+                    if (itemAttr.tags != undefined && itemAttr.tags.length >= filterTags.length) {
+                        var intersection = _.intersection(filterTags, item.attributes.tags);
+                        if (intersection.length == filterTags.length) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    } else {
+                        return false;
+                    }
+                });
+            }
+
+            this._filteredItems = filteredItems;
+            console.log("FILTERED");
+            console.log(this._filteredItems);
+            //empty the current list and redraw it
+            $("#item-result-list").empty();
+            this._createList();
         }
     });
 });
