@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    width: 100%;
 }
 .ui-accordion .ui-accordion-content {
     padding: 0px;
@@ -48,4 +49,9 @@ canvas {
 .item-icon {
     width : 30px;
     height : 30px;
+}
+.ui-widget-content{
+    min-width: 250px;
+    width: 100%;
+    width:auto;
 }
