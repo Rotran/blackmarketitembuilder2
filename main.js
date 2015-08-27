@@ -28,10 +28,16 @@ $(document).ready(function () {
 			accept: ":not(.ui-sortable-helper)",
 			drop: function( event, ui ) {
 				$( this ).find( ".placeholder" ).remove();
-				$( "<li></li>" ).text( ui.draggable.text() ).appendTo( this );
+                var imageSource = ui.draggable.find("img").attr("src");
+                var template = "<li><img class=item-icon src=" + imageSource + "></li>";
+                $("#startGameList").append(template);
             //TODO: after we drop, we should add the item
-            // to the list, then reset the dragged item
-            // to make it look like it snapped in
+            // to the list
+            }
+        }).sortable({
+            items: "li:not(.placeholder)",
+            sort: function(){
+                $(this).removeClass("ui-state-default");
             }
         });
         //midGame
@@ -41,10 +47,14 @@ $(document).ready(function () {
 			accept: ":not(.ui-sortable-helper)",
 			drop: function( event, ui ) {
 				$( this ).find( ".placeholder" ).remove();
-				$( "<li></li>" ).text( ui.draggable.text() ).appendTo( this );
-            //TODO: after we drop, we should add the item
-            // to the list, then reset the dragged item
-            // to make it look like it snapped in
+				var imageSource = ui.draggable.find("img").attr("src");
+                var template = "<li><img class=item-icon src=" + imageSource + "></li>";
+                $("#midGameList").append(template);
+            }
+        }).sortable({
+            items: "li:not(.placeholder)",
+            sort: function(){
+                $(this).removeClass("ui-state-default");
             }
         });
         //endGame
@@ -54,10 +64,14 @@ $(document).ready(function () {
 			accept: ":not(.ui-sortable-helper)",
 			drop: function( event, ui ) {
 				$( this ).find( ".placeholder" ).remove();
-				$( "<li></li>" ).text( ui.draggable.text() ).appendTo( this );
-            //TODO: after we drop, we should add the item
-            // to the list, then reset the dragged item
-            // to make it look like it snapped in
+				var imageSource = ui.draggable.find("img").attr("src");
+                var template = "<li><img class=item-icon src=" + imageSource + "></li>";
+                $("#endGameList").append(template);
+            }
+        }).sortable({
+            items: "li:not(.placeholder)",
+            sort: function(){
+                $(this).removeClass("ui-state-default");
             }
         });
     });
