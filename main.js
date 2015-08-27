@@ -1,8 +1,6 @@
 /*globals Chart */
 $(document).ready(function () {
 
-
-
     var itemCollections = new ItemCollection();
     var allItems = [];
 
@@ -12,6 +10,7 @@ $(document).ready(function () {
             allItems = models.models;
             $("#item-result").itemResults({allItems : allItems});
             $(document).trigger("all-items-loaded");
+            $("#search-button").itemSearch();
         }
     });
 
