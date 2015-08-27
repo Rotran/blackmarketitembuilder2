@@ -16,6 +16,9 @@ $(function () {
             for (var i = 0; i < this._filteredItems.length; i++) {
                 this._createDraggableListItem(this._filteredItems[i]);
             }
+            if(this._filteredItems.length == 0){
+                $("#item-result-list").append("<div>Sorry, no results found.</div>")
+            }
         },
         _createDraggableListItem: function (item) {
             console.log(item);
