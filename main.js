@@ -32,11 +32,12 @@ $(document).ready(function () {
                 var imageSource = ui.draggable.find("img").attr("src");
                 var imageId = ui.draggable.find("img").attr("id");
                 var template = "<li id="+imageId+"><img class=item-icon src=" + imageSource + "></li>";
+                console.log(template);
                 $("#startGameList").append(template);
                 //perhaps we have a widget which shows the icon + gold cost??
                 generateDataFromDrop(ui.draggable);
                 var idd = ui.draggable.find("img").attr("id") ;
-                console.log(idd);
+                console.log("ID in dropped " + idd);
             //TODO: after we drop, we should add the item
             // to the list
             }
@@ -85,7 +86,7 @@ $(document).ready(function () {
     var ctx = $("#firstChart").get(0).getContext("2d");
 
     // First chart
-    lineChartDmg = new Chart(ctx).Line(orionData);
+    lineChartDmg = new Chart(ctx).Line(simpleData);
     ctx = $("#secondChart").get(0).getContext("2d");
     lineChartDef = new Chart(ctx).Line(simpleData);
 
