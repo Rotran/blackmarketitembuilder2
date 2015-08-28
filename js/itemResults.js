@@ -23,12 +23,17 @@ $(function () {
         _createDraggableListItem: function (item) {
             console.log(item);
             var itemAttr = item.attributes;
-            var itemURL = "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/" + itemAttr.image.full;
-            var template = "<li id=" + item.id + "><img id=" + item.id + " class=item-icon src=" + itemURL + "><table class=mini-info><tr><td>" + itemAttr.name + "</td></tr><tr><td><img class=gold-coins src=images/gold-coins.gif>" + itemAttr.gold.total + "</td></tr></table></li>";
+            var itemURL = "http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/" + itemAttr.image.full;
+            var template = "<li dbid="+item.id+" class=items-tooltip-"+item.id+" id=" + item.id +"-listItem><img id=" + item.id +" class=item-icon src=" + itemURL + "><table class=mini-info><tr><td>" + itemAttr.name + "</td></tr><tr><td><img class=gold-coins src=images/gold-coins.gif>" + itemAttr.gold.total + "</td></tr></table></li>";
 
             $("#item-result-list").append(template);
-            $("#" + item.id).draggable({
+            $("#" + item.id+"-listItem").draggable({
                 helper: "clone"
+            });
+            $(".items-tooltip-"+item.id).tooltip({
+                items : ".items-tooltip-"+item.id,
+                content : itemAttr.description
+
             });
         },
         getCurrentItems: function () {

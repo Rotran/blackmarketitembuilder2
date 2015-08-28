@@ -31,11 +31,9 @@ $(document).ready(function () {
             accept: ":not(.ui-sortable-helper)",
             drop: function (event, ui) {
                 $(this).find(".placeholder").remove();
-                var imageSource = ui.draggable.find("img").attr("src");
-                var imageId = ui.draggable.find("img").attr("id");
-                var template = "<li id="+imageId+"><img class=item-icon src=" + imageSource + "></li>";
+                var template = "<li>" + ui.draggable.html().toString() + "</li>";
                 console.log(template);
-                $("#startGameList").append(template);
+                $("#"+divId+"List").append(template);
                 //perhaps we have a widget which shows the icon + gold cost??
                 generateDataFromDrop(ui.draggable);
                 var idd = ui.draggable.find("img").attr("id") ;
