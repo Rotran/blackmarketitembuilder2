@@ -31,6 +31,8 @@ $(document).ready(function () {
                 var imageSource = ui.draggable.find("img").attr("src");
                 var template = "<li><img class=item-icon src=" + imageSource + "></li>";
                 $("#startGameList").append(template);
+                //perhaps we have a widget which shows the icon + gold cost??
+                generateDataFromDrop(ui.draggable);
             //TODO: after we drop, we should add the item
             // to the list
             }
@@ -76,16 +78,12 @@ $(document).ready(function () {
         });
     });
 
-    console.log("Loading up our items");
-
-    console.log("Creating the charts!");
     var ctx = $("#firstChart").get(0).getContext("2d");
-    console.log(ctx);
 
     // First chart
-    var lineChart = new Chart(ctx).Line(orionData);
-    var ctx = $("#secondChart").get(0).getContext("2d");
-    var lineChart2 = new Chart(ctx).Line(simpleData);
+    lineChartDmg = new Chart(ctx).Line(orionData);
+    ctx = $("#secondChart").get(0).getContext("2d");
+    lineChartDef = new Chart(ctx).Line(simpleData);
 
     //chart defaults:
     Chart.defaults.global = {

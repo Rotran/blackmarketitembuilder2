@@ -127,10 +127,13 @@ var MyChartView = Backbone.View.extend({
 // After each drop, this function should be called to re-do the chart
 // The given charts will need to be defined globaly for this to work
 // After each drop we can just go through and do all the charts for simplicity
-function generateDataFromDrop(){
-
+function generateDataFromDrop(draggedItem){
+    console.log("item was dropped, callback func!");
+    console.log(draggedItem);
+    //logic should be done here to dete
     lineChartDmgData();
-    lineChartDmgData();
+    lineChartDefData();
+    lineChartDmg.addData([20, 30], "August");
     //Now need to call update!
 
 }
@@ -148,6 +151,7 @@ function lineChartDefData(){
     return datasets;
 }
 
+//Global variables for the charts.
 var lineChartDmg;
 var lineChartDef;
 
