@@ -34,6 +34,8 @@ $(document).ready(function () {
                 $("#startGameList").append(template);
                 //perhaps we have a widget which shows the icon + gold cost??
                 generateDataFromDrop(ui.draggable);
+                var idd = ui.draggable.find("img").attr("id") ;
+                console.log(idd);
             //TODO: after we drop, we should add the item
             // to the list
             }

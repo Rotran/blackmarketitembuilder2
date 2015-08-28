@@ -134,8 +134,9 @@ function generateDataFromDrop(draggedItem){
     lineChartDmgData();
     lineChartDefData();
     lineChartDmg.addData([20, 30], "August");
-    //Now need to call update!
+    console.log(lineChartDmg.generateLegend());
 
+    //Now need to call update!
 }
 
 // Charts:
