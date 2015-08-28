@@ -30,7 +30,8 @@ $(document).ready(function () {
 			drop: function( event, ui ) {
 				$( this ).find( ".placeholder" ).remove();
                 var imageSource = ui.draggable.find("img").attr("src");
-                var template = "<li><img class=item-icon src=" + imageSource + "></li>";
+                var imageId = ui.draggable.find("img").attr("id");
+                var template = "<li id="+imageId+"><img class=item-icon src=" + imageSource + "></li>";
                 $("#startGameList").append(template);
             //TODO: after we drop, we should add the item
             // to the list
