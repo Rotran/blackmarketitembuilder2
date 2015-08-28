@@ -42,19 +42,28 @@ canvas {
     overflow-y: scroll;
     max-height: 400px;
 }
-#item-drop{
+#item-drop {
     width: 200px;
     float: left;
 }
 .item-icon {
-    width : 30px;
-    height : 30px;
+    width: 47px;
+    height: 47px;
 }
-.ui-widget-content{
+.ui-widget-content {
     min-width: 250px;
     width: 100%;
-    width:auto;
+    width: auto;
 }
-ol#statsList{
+ol#statsList {
     display: flex;
+}
+.gold-coins {
+    float: left;
+    width: 15px;
+    height: 15px;
+}
+.mini-info {
+    font-size: 12px;
+    display: inline-block;
 }
