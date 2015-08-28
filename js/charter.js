@@ -135,6 +135,11 @@ function generateDataFromDrop(draggedItem){
     lineChartDefData();
     lineChartDmg.addData([20, 30], "August");
     console.log(lineChartDmg.generateLegend());
+    var stuff = $("#item-result").itemResults('option','allItems');
+    console.log(stuff);
+    //item.attributes.stats
+    console.log(draggedItem.attributes.stats());
+    console.log(draggedItem.find("attributes").attr("stats"));
 
     //Now need to call update!
 }
@@ -155,5 +160,10 @@ function lineChartDefData(){
 //Global variables for the charts.
 var lineChartDmg;
 var lineChartDef;
+
+//Global variables for the charts data.
+var startGameItems;
+var midGameItems;
+var endGameItems;
 
 var appview = new AppView;
