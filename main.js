@@ -11,6 +11,7 @@ $(document).ready(function () {
             $("#item-result").itemResults({allItems : allItems});
             $(document).trigger("all-items-loaded");
             $("#search-button").itemSearch();
+            $("#item-filter").filterItems();
         }
     });
 

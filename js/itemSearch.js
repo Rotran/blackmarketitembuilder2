@@ -1,27 +1,25 @@
 $(function () {
     $.widget("blackmarket.itemSearch", {
-        options: {
-
-        },
         _create: function () {
             var itemSearch = this;
             $("#search-button").on('click', function () {
-                console.log("CLICKING");
-                var searchText = $("#search-text").val();
-                console.log(searchText);
-                itemSearch._search(searchText);
+                itemSearch._executeSearch();
             });
             $("#search-text").keyup(function (e) {
                 if (e.keyCode === 13) {
-                    console.log("CLICKING");
-                    var searchText = $("#search-text").val();
-                    console.log(searchText);
-                    itemSearch._search(searchText);
+                    itemSearch._executeSearch();
                 }
             });
         },
         _search: function (searchText) {
-            $("#item-result").itemResults('filterDisplayItems', searchText);
+            $("#item-result").itemResults('searchDisplayItems', searchText);
+        },
+        _executeSearch: function () {
+            var searchText = $("#search-text").val();
+            this._search(searchText);
+            //reset all the filter
+            $(".filter-option").prop("checked", false);
+            $(".filter-option-reset").prop("checked", false);
         }
     });
 });
