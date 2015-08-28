@@ -13,15 +13,15 @@ ul {
     max-width: 500px;
     min-height: 100%;
 }
-.item-filter .item-result {
-    min-width: 250px;
-    min-height: 100%;
-}
 .item-filter {
     float: left;
+    min-width: 220px;
+    min-height: 100%;
 }
 .item-result {
     background-color: rebeccapurple;
+    min-width: 250px;
+    min-height: 100%;
 }
 .statistics {
     float: right;
@@ -66,4 +66,7 @@ ol#statsList {
 .mini-info {
     font-size: 12px;
     display: inline-block;
+}
+ul {
+    padding: 10px;
 }

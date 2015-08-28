@@ -16,7 +16,7 @@ $(function () {
             for (var i = 0; i < this._filteredItems.length; i++) {
                 this._createDraggableListItem(this._filteredItems[i]);
             }
-            if(this._filteredItems.length == 0){
+            if (this._filteredItems.length == 0) {
                 $("#item-result-list").append("<div>Sorry, no results found.</div>")
             }
         },
@@ -24,7 +24,7 @@ $(function () {
             console.log(item);
             var itemAttr = item.attributes;
             var itemURL = "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/" + itemAttr.image.full;
-            var template = "<li id=" + item.id + "><img id=" + item.id +" class=item-icon src=" + itemURL + "><table class=mini-info><tr><td>"+itemAttr.name+"</td></tr><tr><td><img class=gold-coins src=images/gold-coins.gif>"+itemAttr.gold.total+"</td></tr></table></li>";
+            var template = "<li id=" + item.id + "><img id=" + item.id + " class=item-icon src=" + itemURL + "><table class=mini-info><tr><td>" + itemAttr.name + "</td></tr><tr><td><img class=gold-coins src=images/gold-coins.gif>" + itemAttr.gold.total + "</td></tr></table></li>";
 
             $("#item-result-list").append(template);
             $("#" + item.id).draggable({

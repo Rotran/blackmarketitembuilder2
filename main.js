@@ -8,7 +8,9 @@ $(document).ready(function () {
         success: function (models, response, options) {
             console.log("MODELS", models);
             allItems = models.models;
-            $("#item-result").itemResults({allItems : allItems});
+            $("#item-result").itemResults({
+                allItems: allItems
+            });
             $(document).trigger("all-items-loaded");
             $("#search-button").itemSearch();
             $("#item-filter").filterItems();
@@ -22,13 +24,13 @@ $(document).ready(function () {
         });
     });
 
-    $("#drop-items").load("templates/dropped.html", function(){
-        $("#startGame").droppable({
+    function createDroppable(divId) {
+        $("#" + divId).droppable({
             activeClass: "ui-state-default",
-			hoverClass: "ui-state-hover",
-			accept: ":not(.ui-sortable-helper)",
-			drop: function( event, ui ) {
-				$( this ).find( ".placeholder" ).remove();
+            hoverClass: "ui-state-hover",
+            accept: ":not(.ui-sortable-helper)",
+            drop: function (event, ui) {
+                $(this).find(".placeholder").remove();
                 var imageSource = ui.draggable.find("img").attr("src");
                 var imageId = ui.draggable.find("img").attr("id");
                 var template = "<li id="+imageId+"><img class=item-icon src=" + imageSource + "></li>";
@@ -43,44 +45,17 @@ $(document).ready(function () {
             }
         }).sortable({
             items: "li:not(.placeholder)",
-            sort: function(){
+            sort: function () {
                 $(this).removeClass("ui-state-default");
             }
         });
-        //midGame
-        $("#midGame").droppable({
-            activeClass: "ui-state-default",
-			hoverClass: "ui-state-hover",
-			accept: ":not(.ui-sortable-helper)",
-			drop: function( event, ui ) {
-				$( this ).find( ".placeholder" ).remove();
-				var imageSource = ui.draggable.find("img").attr("src");
-                var template = "<li><img class=item-icon src=" + imageSource + "></li>";
-                $("#midGameList").append(template);
-            }
-        }).sortable({
-            items: "li:not(.placeholder)",
-            sort: function(){
-                $(this).removeClass("ui-state-default");
-            }
-        });
-        //endGame
-        $("#endGame").droppable({
-            activeClass: "ui-state-default",
-			hoverClass: "ui-state-hover",
-			accept: ":not(.ui-sortable-helper)",
-			drop: function( event, ui ) {
-				$( this ).find( ".placeholder" ).remove();
-				var imageSource = ui.draggable.find("img").attr("src");
-                var template = "<li><img class=item-icon src=" + imageSource + "></li>";
-                $("#endGameList").append(template);
-            }
-        }).sortable({
-            items: "li:not(.placeholder)",
-            sort: function(){
-                $(this).removeClass("ui-state-default");
-            }
-        });
+    }
+
+    $("#drop-items").load("templates/dropped.html", function () {
+        createDroppable("startGame");
+        createDroppable("midGame");
+        createDroppable("endGame");
+
     });
 
     var ctx = $("#firstChart").get(0).getContext("2d");
