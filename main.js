@@ -31,13 +31,13 @@ $(document).ready(function () {
             accept: ":not(.ui-sortable-helper)",
             drop: function (event, ui) {
                 $(this).find(".placeholder").remove();
-                var template = "<li>" + ui.draggable.html().toString() + "</li>";
-                console.log(template);
+                var idd = ui.draggable.find("img").attr("id");
+                var template = "<li id=dropped-"+idd+" class=items-tooltip-"+idd+">" + ui.draggable.html().toString() + "</li>";
                 $("#"+divId+"List").append(template);
+                var tooltipId = "#dropped-" + idd;
+                $("#dropped-"+idd).itemTooltip({itemId : idd, divId : tooltipId});
                 //perhaps we have a widget which shows the icon + gold cost??
                 generateDataFromDrop(ui.draggable);
-                var idd = ui.draggable.find("img").attr("id") ;
-                console.log("ID in dropped " + idd);
             //TODO: after we drop, we should add the item
             // to the list
             }

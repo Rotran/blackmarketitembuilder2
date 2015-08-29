@@ -18,7 +18,6 @@ $(function () {
             });
             $(".filter-option").on('click', function () {
                 $(".filter-option-reset").prop("checked", false);
-                console.log("click filter");
                 var filterTag = $(this).attr("id");
                 //check if is checked or unchecked and pop or push accordingly
                 if ($(this).prop("checked")) {

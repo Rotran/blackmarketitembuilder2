@@ -30,11 +30,8 @@ $(function () {
             $("#" + item.id+"-listItem").draggable({
                 helper: "clone"
             });
-            $(".items-tooltip-"+item.id).tooltip({
-                items : ".items-tooltip-"+item.id,
-                content : itemAttr.description
-
-            });
+            var divId = ".items-tooltip-"+item.id
+            $(".items-tooltip-"+item.id).itemTooltip({itemId : item.id, divId});
         },
         getCurrentItems: function () {
             return this._filterDisplayItems;
