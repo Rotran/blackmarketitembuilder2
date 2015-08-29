@@ -30,10 +30,18 @@ $(document).ready(function () {
             hoverClass: "ui-state-hover",
             accept: ":not(.ui-sortable-helper)",
             drop: function (event, ui) {
-                $(this).find(".placeholder").remove();
+                $(this).find(".placeholder").hide();
                 var idd = ui.draggable.find("img").attr("id");
-                var template = "<li id=dropped-"+idd+" class=dropped-"+idd+">" + ui.draggable.html().toString() + "</li>";
+                var template = "<li id=dropped-"+idd+" class=dropped-"+idd+">" + ui.draggable.html().toString()+" <div class=remove-item style=float:right >X</div></li>";
                 $("#"+divId+"List").append(template);
+                $(".remove-item").on("click", function(){
+                    console.log($(this).parent().siblings());
+                    if($(this).parent().siblings().length == 1){
+                        console.log("ONLY ONE SIB");
+                        $(this).parent().parent().find(".placeholder").show();
+                    }
+                    $(this).parent().remove();
+                });
                 var tooltipId = ".dropped-" + idd;
                 $(".dropped-"+idd).itemTooltip({itemId : idd, divId : tooltipId});
                 //perhaps we have a widget which shows the icon + gold cost??
