@@ -59,7 +59,7 @@ $(document).ready(function () {
     var ctx = $("#firstChart").get(0).getContext("2d");
 
     // First chart
-    lineChartDmg = new Chart(ctx).Line(simpleData);
+    lineChartDmg = new Chart(ctx).Line(orionData);
     ctx = $("#secondChart").get(0).getContext("2d");
     lineChartDef = new Chart(ctx).Line(simpleData);
 

@@ -70,3 +70,8 @@ ol#statsList {
 ul {
     padding: 10px;
 }
+.droppedList{
+    overflow-y: scroll;
+    height: 200px;
+}
+

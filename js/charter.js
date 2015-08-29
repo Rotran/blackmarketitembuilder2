@@ -83,7 +83,7 @@ var simpleData = {
 };
 
 var orionData = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: ["100", "200", "300", "400", "500"],
     datasets: [
         {
             label: "My First dataset",
@@ -93,8 +93,8 @@ var orionData = {
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(220,220,220,1)",
-            data: [65, 59, 80, 81, 56, 55, 40] //these datapoints will have to be vars
-                //They could be based on the view collection of items we have first one second...
+            //data: [65, 59, 80, 81, 56, 55, 40] //these datapoints will have to be vars
+            //They could be based on the view collection of items we have first one second...
         },
         {
             label: "My Second dataset",
@@ -104,18 +104,18 @@ var orionData = {
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86, 27, 90]
-        },
-        {
-            label: "3rd Dataset",
-            fillColor: "rgba(255,0,0,0.3)",
-            strokeColor: "",
-            pointColor: "",
-            pointStrokeColor: "",
-            pointHighlightFill: "rgba(255,0,0,0.3)", //this one is the hover-over color dot key
-            pointHighlightStroke: "rgba(255,0,0,0.3)",
-            data: [10, 15, 20, 25, 35, 45, 65]
-        }
+            //data: [28, 48, 40, 19, 86, 27, 90]
+        } //,
+//        {
+//            label: "3rd Dataset",
+//            fillColor: "rgba(255,0,0,0.3)",
+//            strokeColor: "",
+//            pointColor: "",
+//            pointStrokeColor: "",
+//            pointHighlightFill: "rgba(255,0,0,0.3)", //this one is the hover-over color dot key
+//            pointHighlightStroke: "rgba(255,0,0,0.3)",
+//            data: [10, 15, 20, 25, 35, 45, 65]
+//        }
     ]
 };
 
@@ -159,13 +159,13 @@ function generateDataFromDrop(draggedItem) {
         console.log(key);
         console.log(value);
         if (key == flatphydmg) {
-            //tempphydmg = value;
-            console.log("adding " + value);
             flatPhyTotals += value;
         } else if (key == flatmagdmg) {
-            //tempmagdmg = value;
-            console.log("adding " + value);
             flatMagTotals += value;
+        } else if (key == flatDef) {
+            flatDefTotals += value;
+        } else if (key == flatSpellBlock) {
+            flatSpellBlockTotals += value;
         }
     });
     //flatphydmg += tempphydmg;
@@ -176,16 +176,24 @@ function generateDataFromDrop(draggedItem) {
         lineChartDmg.addData([flatPhyTotals, flatMagTotals], modelDropped.id);
         lineChartDmg.update();
     }
+    else if(flatDefTotals != 0 || flatSpellBlockTotals != 0){
+        lineChartDef.addData([flatDefTotals, flatSpellBlockTotals], modelDropped.id);
+        lineChartDef.update();
+    }
     //lineChartDmg.addData([modelDropped.attributes.stats])
 }
 
 // DataStats to parse out
 var flatphydmg = "FlatPhysicalDamageMod";
 var flatmagdmg = "FlatMagicDamageMod";
+var flatDef = "FlatArmorMod";
+var flatSpellBlock = "FlatSpellBlockMod";
 
 //DataAdded
 var flatPhyTotals = 0;
 var flatMagTotals = 0;
+var flatDefTotals = 0;
+var flatSpellBlockTotals = 0;
 
 
 // Charts:
