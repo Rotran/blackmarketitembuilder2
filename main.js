@@ -44,7 +44,9 @@ $(document).ready(function () {
         }).sortable({
             items: "li:not(.placeholder)",
             sort: function () {
-                $(this).removeClass("ui-state-default");
+                var idd = $(this).attr("dbid");
+                var tooltipId = "#dropped-"+idd;
+                $(this).removeClass("ui-state-default").tooltip({itemId : idd, divId: tooltipId});
             }
         });
     }
