@@ -2,6 +2,10 @@ body {
     margin: 0;
     width: 100%;
 }
+.logo {
+    display:block;
+    margin:auto;
+}
 .ui-accordion .ui-accordion-content {
     padding: 0px;
 }
@@ -19,16 +23,12 @@ ul {
     min-height: 100%;
 }
 .item-result {
-    background-color: rebeccapurple;
     min-width: 250px;
     min-height: 100%;
 }
 .statistics {
     float: right;
-    min-width: 1280px;
-    max-width: 1280px;
     min-height: 100%;
-    background-color: darkgray;
     opacity: .7;
 }
 .items-selected {
@@ -39,11 +39,11 @@ canvas {
     background-color: black;
 }
 .item-result-list {
-    overflow-y: scroll;
+    overflow-y: auto;
     max-height: 400px;
 }
 #item-drop {
-    width: 200px;
+    min-width: 200px;
     float: left;
 }
 .item-icon {
@@ -71,7 +71,7 @@ ul {
     padding: 10px;
 }
 .droppedList{
-    overflow-y: scroll;
-    height: 200px;
+    overflow-y: auto;
+    height: 400px;
 }
 

@@ -16,6 +16,7 @@
 <!-- chartjs cdn-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 <link rel="stylesheet" href="blackMarket.css">
+<link rel="stylesheet" href="jquery-ui.theme.min.css">
 <script src=main.js></script>
 <script src="js/itemModel.js"></script>
 <script src="js/itemView.js"></script>
@@ -26,11 +27,11 @@
 <script src="js/itemTooltip.js"></script>
 
 <body background="images/act-3-world-layer-base.jpg" style="min-height:100%">
-    <h1><img src="images/LOL_LOGOSmallTransparent.png"></h1>
+    <h1><img class=logo src="images/LOL_LOGOSmallTransparent.png"></h1>
     <div id=main-app>
         <table>
             <tr>
-                <td rowspan="2">
+                <td>
                     <div id=search>
                         <input id=search-text type="text" placeholder="Search for item" />
                         <button id=search-button>Search</button>
@@ -44,27 +45,23 @@
                         <ul id=item-result-list class=item-result-list></ul>
                     </span>
                     </div>
-
-                </td>
-                <td>
                 </td>
                 <td>
                     <div id=item-drop class=item-drop>
-                        <span id=drop-items class=drop-items></span>
+                        <div id=drop-items class=drop-items></div>
                     </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
                 </td>
                 <td>
                     <div id=statistics class=statistics>
-                        <h2>Statistics</h2>
                         <div id=item-charts>
-                            <ol>
-                                <canvas id="firstChart" width="400" height="400"></canvas>
-                                <canvas id="secondChart" width="400" height="400"></canvas>
-                            </ol>
+                            <ul>
+                                <li>
+                                    <canvas id="firstChart" width="600" height="200"></canvas>
+                                </li>
+                                <li>
+                                    <canvas id="secondChart" width="600" height="200"></canvas>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </td>
