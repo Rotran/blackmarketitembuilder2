@@ -179,13 +179,16 @@ function generateDataFromDrop(draggedItem) {
         if (key == flatphydmg) {
             flatPhyTotals += value;
             isdmg = true;
-        } else if (key == flatmagdmg) {
+        }
+        if (key == flatmagdmg) {
             flatMagTotals += value;
             isdmg = true;
-        } else if (key == flatDef) {
+        }
+        if (key == flatDef) {
             flatDefTotals += value;
             isdef = true;
-        } else if (key == flatSpellBlock) {
+        }
+        if (key == flatSpellBlock) {
             flatSpellBlockTotals += value;
             isdef = true;
         }
@@ -197,12 +200,21 @@ function generateDataFromDrop(draggedItem) {
     if (isdmg) {
         lineChartDmg.addData([flatPhyTotals, flatMagTotals], modelDropped.id);
         lineChartDmg.update();
-    }
-    else if(isdef){
+    } else if (isdef) {
         lineChartDef.addData([flatDefTotals, flatSpellBlockTotals], modelDropped.id);
         lineChartDef.update();
     }
     //lineChartDmg.addData([modelDropped.attributes.stats])
+}
+
+function sortChartByDrop(draggedItem) {
+    //Going to need to just parse through all
+    //the dropped items, clear out the chart then add
+    //each data point all over again.
+    //Since it's a resort, we should know which chart
+    //And won't have to do both def and dmg??
+
+
 }
 
 // DataStats to parse out
@@ -234,10 +246,5 @@ function lineChartDefData() {
 //Global variables for the charts.
 var lineChartDmg;
 var lineChartDef;
-
-//Global variables for the charts data.
-var startGameItems;
-var midGameItems;
-var endGameItems;
 
 var appview = new AppView;
