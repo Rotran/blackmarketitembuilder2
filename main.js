@@ -32,10 +32,10 @@ $(document).ready(function () {
             drop: function (event, ui) {
                 $(this).find(".placeholder").remove();
                 var idd = ui.draggable.find("img").attr("id");
-                var template = "<li id=dropped-"+idd+" class=items-tooltip-"+idd+">" + ui.draggable.html().toString() + "</li>";
+                var template = "<li id=dropped-"+idd+" class=dropped-"+idd+">" + ui.draggable.html().toString() + "</li>";
                 $("#"+divId+"List").append(template);
-                var tooltipId = "#dropped-" + idd;
-                $("#dropped-"+idd).itemTooltip({itemId : idd, divId : tooltipId});
+                var tooltipId = ".dropped-" + idd;
+                $(".dropped-"+idd).itemTooltip({itemId : idd, divId : tooltipId});
                 //perhaps we have a widget which shows the icon + gold cost??
                 generateDataFromDrop(ui.draggable);
             //TODO: after we drop, we should add the item
@@ -45,7 +45,7 @@ $(document).ready(function () {
             items: "li:not(.placeholder)",
             sort: function () {
                 var idd = $(this).attr("dbid");
-                var tooltipId = "#dropped-"+idd;
+                var tooltipId = ".dropped-"+idd;
                 $(this).removeClass("ui-state-default").tooltip({itemId : idd, divId: tooltipId});
             }
         });
