@@ -61,9 +61,30 @@ var simpleOptions = {
 };
 
 
-var simpleData = {
+var dmgData = {
 
-    labels: ["100", "200", "300", "400", "500"],
+    labels: [],
+    datasets: [
+        {
+            label: "AD",
+            fillColor: "rgba(244, 0, 0, 1)",
+            strokeColor: "rgba(244, 0, 0, 1)",
+            pointColor: "rgba(244, 0, 0, 1)",
+            //data: [20, 30, 40, 50, 60]
+        },
+        {
+            label: "AP",
+            fillColor: "rgba(177, 71, 255, 1)",
+            strokeColor: "rgba(177, 71, 255, 1)",
+            pointColor: "rgba(177, 71, 255, 1)",
+            //data: [5, 10, 15, 20, 25]
+        },
+    ]
+};
+
+var defData = {
+
+    labels: [],
     datasets: [
         {
             label: "AD",
@@ -148,35 +169,36 @@ function generateDataFromDrop(draggedItem) {
     });
 
     var modelDropped = allItems[droppedModelID];
-    console.log("Found it!");
-    console.log(modelDropped);
-    console.log(modelDropped.attributes.stats);
-    //the stats can be multiple key value pairs.
-    //need to parse out the stuff.
-    var tempphydmg = 0;
-    var tempmagdmg = 0;
+
+    var isdmg = false;
+    var isdef = false;
+
     _.each(modelDropped.attributes.stats, function (value, key) {
         console.log(key);
         console.log(value);
         if (key == flatphydmg) {
             flatPhyTotals += value;
+            isdmg = true;
         } else if (key == flatmagdmg) {
             flatMagTotals += value;
+            isdmg = true;
         } else if (key == flatDef) {
             flatDefTotals += value;
+            isdef = true;
         } else if (key == flatSpellBlock) {
             flatSpellBlockTotals += value;
+            isdef = true;
         }
     });
     //flatphydmg += tempphydmg;
     //flatmagdmg += tempmagdmg;
     console.log("flat phy: " + flatphydmg);
     console.log("flat mag: " + flatmagdmg);
-    if (flatMagTotals != 0 || flatPhyTotals != 0) {
+    if (isdmg) {
         lineChartDmg.addData([flatPhyTotals, flatMagTotals], modelDropped.id);
         lineChartDmg.update();
     }
-    else if(flatDefTotals != 0 || flatSpellBlockTotals != 0){
+    else if(isdef){
         lineChartDef.addData([flatDefTotals, flatSpellBlockTotals], modelDropped.id);
         lineChartDef.update();
     }
@@ -194,7 +216,6 @@ var flatPhyTotals = 0;
 var flatMagTotals = 0;
 var flatDefTotals = 0;
 var flatSpellBlockTotals = 0;
-
 
 // Charts:
 function lineChartDmgData() {
