@@ -41,6 +41,9 @@ $(document).ready(function () {
                         $(this).parent().parent().find(".placeholder").show();
                     }
                     $(this).parent().remove();
+                    console.log("drop remove");
+                    console.log(ui.draggable);
+                    removeData();
                 });
                 var tooltipId = ".dropped-" + idd;
                 $(".dropped-"+idd).itemTooltip({itemId : idd, divId : tooltipId});
@@ -55,6 +58,15 @@ $(document).ready(function () {
                 var idd = $(this).attr("dbid");
                 var tooltipId = ".dropped-"+idd;
                 $(this).removeClass("ui-state-default").tooltip({itemId : idd, divId: tooltipId});
+            },
+            stop: function(event, ui){
+                sortChart();
+            },
+            change: function(event, ui){
+                console.log("Change happes duuude");
+            },
+            update: function(event, ui){
+                console.log("updatedddd");
             }
         });
     }

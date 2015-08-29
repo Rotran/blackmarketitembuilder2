@@ -204,17 +204,35 @@ function generateDataFromDrop(draggedItem) {
         lineChartDef.addData([flatDefTotals, flatSpellBlockTotals], modelDropped.id);
         lineChartDef.update();
     }
+    console.log("added chart stuff");
+    console.log(lineChartDef);
+    console.log(lineChartDmg);
     //lineChartDmg.addData([modelDropped.attributes.stats])
 }
 
-function sortChartByDrop(draggedItem) {
+function sortChart() {
     //Going to need to just parse through all
     //the dropped items, clear out the chart then add
     //each data point all over again.
     //Since it's a resort, we should know which chart
     //And won't have to do both def and dmg??
+    console.log("We sorted???");
+    console.log(lineChartDmg);
+    _.each(lineChartDef.datasets, function(data){
+        _.each(data.points, function(point){
+           console.log("point:")
+           console.log(point);
+        });
+        console.log("datasets");
+        console.log(data);
+    });
 
+}
 
+function removeData(){
+    //do something??
+    lineChartDef.removeData();
+    lineChartDef.update();
 }
 
 // DataStats to parse out
