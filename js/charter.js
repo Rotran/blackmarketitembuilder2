@@ -149,8 +149,6 @@ var MyChartView = Backbone.View.extend({
 // The given charts will need to be defined globaly for this to work
 // After each drop we can just go through and do all the charts for simplicity
 function generateDataFromDrop(draggedItem) {
-    console.log("item was dropped, callback func!");
-    console.log(draggedItem);
     //logic should be done here to dete
     lineChartDmgData();
     lineChartDefData();
@@ -158,7 +156,6 @@ function generateDataFromDrop(draggedItem) {
     //lineChartDmg.addData([20, 30], "August");
     //console.log(lineChartDmg.generateLegend());
     var itemDraggedID = draggedItem.find("img").attr("id");
-    console.log("dragged item id: " + itemDraggedID);
     var allItems = $("#item-result").itemResults('option', 'allItems');
     var droppedModelID = _.findIndex(allItems, function (item) {
         if (item.id == itemDraggedID) {
@@ -174,8 +171,6 @@ function generateDataFromDrop(draggedItem) {
     var isdef = false;
 
     _.each(modelDropped.attributes.stats, function (value, key) {
-        console.log(key);
-        console.log(value);
         if (key == flatphydmg) {
             flatPhyTotals += value;
             isdmg = true;
@@ -195,8 +190,6 @@ function generateDataFromDrop(draggedItem) {
     });
     //flatphydmg += tempphydmg;
     //flatmagdmg += tempmagdmg;
-    console.log("flat phy: " + flatphydmg);
-    console.log("flat mag: " + flatmagdmg);
     if (isdmg) {
         lineChartDmg.addData([flatPhyTotals, flatMagTotals], modelDropped.id);
         lineChartDmg.update();
