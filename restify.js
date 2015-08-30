@@ -12,6 +12,8 @@ function fetchItemById(req, res, next) {
         res.writeHead(200, {
             'Content-Type': 'application/json; charset=utf-8'
         });
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "X-Requested-With");
         res.end(JSON.stringify(response[0]));
     });
     return next();
@@ -24,6 +26,8 @@ function fetchAllItems(req, res, next) {
         res.writeHead(200, {
             'Content-Type': 'application/json; charset=utf-8'
         });
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "X-Requested-With");
         res.end(allItems);
         return next();
     });
@@ -32,11 +36,11 @@ function fetchAllItems(req, res, next) {
 restify.CORS.ALLOW_HEADERS.push('authorization');
 var server = restify.createServer();
 server.use(
-  function crossOrigin(req,res,next){
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    return next();
-  }
+    function crossOrigin(req, res, next) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "X-Requested-With");
+        return next();
+    }
 );
 server.use(restify.CORS());
 server.use(restify.fullResponse());
