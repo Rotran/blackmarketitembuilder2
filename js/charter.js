@@ -59,14 +59,14 @@ var dmgData = {
     datasets: [
         {
             label: "AD",
-            fillColor: "rgba(244, 0, 0, 1)",
+            fillColor: "rgba(220,220,220,0.2)",
             strokeColor: "rgba(244, 0, 0, 1)",
             pointColor: "rgba(244, 0, 0, 1)",
             //data: [20, 30, 40, 50, 60]
         },
         {
             label: "AP",
-            fillColor: "rgba(177, 71, 255, 1)",
+            fillColor: "rgba(220,220,220,0.2)",
             strokeColor: "rgba(177, 71, 255, 1)",
             pointColor: "rgba(177, 71, 255, 1)",
             //data: [5, 10, 15, 20, 25]
@@ -79,17 +79,17 @@ var defData = {
     labels: [],
     datasets: [
         {
-            label: "AD",
-            fillColor: "rgba(244, 0, 0, 1)",
-            strokeColor: "rgba(244, 0, 0, 1)",
-            pointColor: "rgba(244, 0, 0, 1)",
+            label: "Defense",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(48, 48, 50, 1)",
+            pointColor: "rgba(48, 48, 50, 1)",
             //data: [20, 30, 40, 50, 60]
         },
         {
-            label: "AP",
-            fillColor: "rgba(177, 71, 255, 1)",
-            strokeColor: "rgba(177, 71, 255, 1)",
-            pointColor: "rgba(177, 71, 255, 1)",
+            label: "Magic Resist",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(108, 48, 77, 1)",
+            pointColor: "rgba(108, 48, 77, 1)",
             //data: [5, 10, 15, 20, 25]
         },
     ]
@@ -147,34 +147,27 @@ function generateDataFromDrop(draggedItem, divID) {
     } else if (divID == "endGame") {
         endGAmeDiv.push(itemDraggedID);
     }
-    updateCharts();
-
-    //    var droppedModelID = _.findIndex(allItems, function (item) {
-    //        if (item.id == itemDraggedID) {
-    //            return true;
-    //        } else {
-    //            return false;
-    //        }
-    //    });
-    //
-    //    var modelDropped = allItems[droppedModelID];
-    //    addDataToChart(modelDropped);
-    //lineChartDmg.addData([modelDropped.attributes.stats])
+    updateCharts(1);
 }
 
-function updateCharts() {
+function updateCharts(temp) {
     //Reset the totals
     flatPhyTotals = 0;
     flatMagTotals = 0;
     flatDefTotals = 0;
     flatSpellBlockTotals = 0;
-    var i;
-    for(i = 0; i < getItemCount(); i++){
+    var deletdef = lineChartDef.datasets[0].points.length;
+    var deletdmg = lineChartDmg.datasets[0].points.length;
+    var ii;
+    for (ii = 0; ii < deletdef; ii++) {
         lineChartDef.removeData();
+        console.log("deleting!!!");
+    }
+    for (ii = 0; ii < deletdmg; ii++) {
         lineChartDmg.removeData();
-        console.log("removing data " + i);
     }
 
+    //Add in the new data
     //startGAme
     _.each(startGameDiv, function (id) {
         addDataToChart(getModel(id));
@@ -231,22 +224,32 @@ function addDataToChart(model) {
     //flatmagdmg += tempmagdmg;
     if (isdmg) {
         lineChartDmg.addData([flatPhyTotals, flatMagTotals], model.id);
-    } else if (isdef) {
+        //lineChartDef.update();
+    }
+    if (isdef) {
         lineChartDef.addData([flatDefTotals, flatSpellBlockTotals], model.id);
+        //lineChartDmg.update();
     }
 }
 
-function sortChart(newArray) {
+function sortChart(newArray, divID) {
     // getting an array of ["dropped-1029", "dropped-1006", "dropped-1001"]
     var IDs = scrubData(newArray);
-    console.log(IDs);
 
-
+    if (divID == "startGame") {
+        startGameDiv = IDs;
+    } else if (divID == "midGame") {
+        midGameDiv = IDs;
+    } else if (divID == "endGame") {
+        endGAmeDiv = IDs;
+    }
+    updateCharts(0);
 }
 
 function scrubData(dirtData) {
     var dataSet = [];
     _.each(dirtData, function (data) {
+        //remove the "dropped-"
         dataSet.push(data.substring(8, data.length));
     });
 
@@ -259,7 +262,7 @@ function removeData() {
     lineChartDef.update();
 }
 
-function getItemCount(){
+function getItemCount() {
     var count = 0;
     count += startGameDiv.length;
     count += midGameDiv.length;
