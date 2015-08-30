@@ -25,7 +25,8 @@ $(function () {
             console.log(this.options.divId);
             $(this.options.divId).tooltip({
                 items: this.options.divId,
-                content: description
+                content: description,
+                position : { my: "left+15 center", at: "right-20 center", collision : "flip" }
             });
         }
     });

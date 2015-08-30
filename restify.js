@@ -29,6 +29,7 @@ function fetchAllItems(req, res, next) {
     });
 }
 
+restify.CORS.ALLOW_HEADERS.push('authorization');
 var server = restify.createServer();
 server.use(
   function crossOrigin(req,res,next){
@@ -37,6 +38,8 @@ server.use(
     return next();
   }
 );
+server.use(restify.CORS());
+server.use(restify.fullResponse());
 server.use(restify.acceptParser(server.acceptable));
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
