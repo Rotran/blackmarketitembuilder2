@@ -35,16 +35,21 @@ $(document).ready(function () {
                 var template = "<li id=dropped-" + idd + " class=dropped-" + idd + ">" + ui.draggable.html().toString() + " <div class=remove-item style=float:right >X</div></li>";
                 $("#" + divId + "List").append(template);
                 $(".remove-item").on("click", function () {
-                    console.log("siblings: " + $(this).parent().siblings());
+                    //console.log("siblings: " + $(this).parent().siblings());
                     if ($(this).parent().siblings().length == 1) {
                         console.log("ONLY ONE SIB");
                         $(this).parent().parent().find(".placeholder").show();
                     }
+                    //console.log("this in clicker " + $(this));
+                    //console.log(event);
+                    //console.log(ui.sortable('toArray'));
+                    //console.log("parent " + $(this).parent());
                     $(this).parent().remove();
-                    console.log("drop remove");
-                    console.log(ui.draggable);
+                    sortChart($("#" + divId).sortable('toArray'), divId);
+                    //console.log("drop remove");
+                    //console.log(ui.draggable);
                     //console.log($(this).sortable('toArray'));
-                    removeData();
+                    //removeData();
                 });
                 var tooltipId = ".dropped-" + idd;
                 $(".dropped-" + idd).itemTooltip({
@@ -64,7 +69,11 @@ $(document).ready(function () {
                 });
             },
             update: function (event, ui) {
+                //console.log("In sortable update!!!! " + $(this));
                 sortChart($(this).sortable('toArray'), divId);
+            },
+            change: function(event, ui){
+                //console.log("Change is happening");
             }
         });
     }

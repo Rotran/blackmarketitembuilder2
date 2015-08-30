@@ -161,7 +161,7 @@ function updateCharts(temp) {
     var ii;
     for (ii = 0; ii < deletdef; ii++) {
         lineChartDef.removeData();
-        console.log("deleting!!!");
+        //console.log("deleting!!!");
     }
     for (ii = 0; ii < deletdmg; ii++) {
         lineChartDmg.removeData();
