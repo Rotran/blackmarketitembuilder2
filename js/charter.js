@@ -1,3 +1,4 @@
+/*globals Chart */
 //---------------------------------------------------
 //Functions to implement chart views for stats
 
@@ -135,7 +136,6 @@ var orionData = {
 // Users will be dropping items into an area and moving them around
 // After each drop, this function should be called to re-do the chart
 // The given charts will need to be defined globaly for this to work
-// After each drop we can just go through and do all the charts for simplicity
 function generateDataFromDrop(draggedItem, divID) {
 
     var itemDraggedID = draggedItem.find("img").attr("id");
@@ -147,41 +147,94 @@ function generateDataFromDrop(draggedItem, divID) {
     } else if (divID == "endGame") {
         endGAmeDiv.push(itemDraggedID);
     }
-    updateCharts(1);
+    updateCharts(1, divID);
 }
 
-function updateCharts(temp) {
+function updateCharts(temp, divid) {
     //Reset the totals
     flatPhyTotals = 0;
     flatMagTotals = 0;
     flatDefTotals = 0;
     flatSpellBlockTotals = 0;
-    var deletdef = lineChartDef.datasets[0].points.length;
-    var deletdmg = lineChartDmg.datasets[0].points.length;
     var ii;
-    for (ii = 0; ii < deletdef; ii++) {
-        lineChartDef.removeData();
-        //console.log("deleting!!!");
-    }
-    for (ii = 0; ii < deletdmg; ii++) {
-        lineChartDmg.removeData();
-    }
 
     //Add in the new data
     //startGAme
-    _.each(startGameDiv, function (id) {
-        addDataToChart(getModel(id));
-    });
-    //midgame:
-    _.each(midGameDiv, function (id) {
-        addDataToChart(getModel(id));
-    });
+    if (divid == "startGame") {
+        console.log(lineChartDmg.datasets[1].data);
+        //lineChartDef.destroy();
+        //lineChartDmg.destroy();
+//        $('div1DmgChart').remove();
+//        $('#lidiv1dmg').append('<canvas id="div1DmgChart" width="400" height="200"></canvas>');
+//        $('div1DefChart').remove();
+//        $('#lidiv1def').append('<canvas id="div1DefChart" width="400" height="200"></canvas>');
+
+
+        //var ctx = $("#div1DefChart").get(0).getContext("2d");
+        //lineChartDef = new Chart(ctx1def).Line(defData);
+        //ctx = $("#div1DmgChart").get(0).getContext("2d");
+        //lineChartDmg = new Chart(ctx1dmg).Line(dmgData);
+        var deletdef = lineChartDef.datasets[0].points.length;
+        var deletdmg = lineChartDmg.datasets[0].points.length;
+                for (ii = 0; ii < deletdef; ii++) {
+                    //lineChartDef.datasets = [];
+                    lineChartDef.removeData();
+                    //lineChartDef.stop();
+                    //console.log("deleting!!!");
+                }
+                for (ii = 0; ii < deletdmg; ii++) {
+                    //lineChartDmg.datasets = [];
+                    lineChartDmg.removeData();
+                    //lineChartDmg.stop();
+                }
+        _.each(startGameDiv, function (id) {
+            addDataToChart(getModel(id), lineChartDmg, lineChartDef);
+        });
+        lineChartDef.update();
+        lineChartDmg.update();
+    }
+    //midgame
+    if (divid == "midGame") {
+        console.log(lineChartDmgdiv2.datasets);
+        console.log(lineChartDmgdiv2.datasets[0].points);
+        lineChartDefdiv2.stop();
+        lineChartDmgdiv2.stop();
+        var deletdef = lineChartDefdiv2.datasets[0].points.length;
+        var deletdmg = lineChartDmgdiv2.datasets[0].points.length;
+        for (ii = 0; ii < deletdef; ii++) {
+            lineChartDefdiv2.removeData();
+            //console.log("deleting!!!");
+        }
+        for (ii = 0; ii < deletdmg; ii++) {
+            lineChartDmgdiv2.removeData();
+        }
+
+        _.each(midGameDiv, function (id) {
+            addDataToChart(getModel(id), lineChartDmgdiv2, lineChartDefdiv2);
+        });
+        lineChartDefdiv2.render();
+        lineChartDmgdiv2.render();
+//        lineChartDefdiv2.update();
+//        lineChartDmgdiv2.update();
+    }
     //endGame:
-    _.each(endGAmeDiv, function (id) {
-        addDataToChart(getModel(id));
-    });
-    lineChartDef.update();
-    lineChartDmg.update();
+    if (divid == "endGame") {
+        var deletdef = lineChartDefdiv3.datasets[0].points.length;
+        var deletdmg = lineChartDmgdiv3.datasets[0].points.length;
+        for (ii = 0; ii < deletdef; ii++) {
+            lineChartDefdiv3.removeData();
+            //console.log("deleting!!!");
+        }
+        for (ii = 0; ii < deletdmg; ii++) {
+            lineChartDmgdiv3.removeData();
+        }
+
+        _.each(endGAmeDiv, function (id) {
+            addDataToChart(getModel(id), lineChartDmgdiv3, lineChartDefdiv3);
+        });
+        lineChartDefdiv3.update();
+        lineChartDmgdiv3.update();
+    }
 }
 
 function getModel(itemID) {
@@ -198,7 +251,7 @@ function getModel(itemID) {
     return allItems[modelid];
 }
 
-function addDataToChart(model) {
+function addDataToChart(model, chartdmg, chartdef) {
     var isdmg = false;
     var isdef = false;
 
@@ -223,11 +276,11 @@ function addDataToChart(model) {
     //flatphydmg += tempphydmg;
     //flatmagdmg += tempmagdmg;
     if (isdmg) {
-        lineChartDmg.addData([flatPhyTotals, flatMagTotals], model.id);
+        chartdmg.addData([flatPhyTotals, flatMagTotals], model.id);
         //lineChartDef.update();
     }
     if (isdef) {
-        lineChartDef.addData([flatDefTotals, flatSpellBlockTotals], model.id);
+        chartdef.addData([flatDefTotals, flatSpellBlockTotals], model.id);
         //lineChartDmg.update();
     }
 }
@@ -243,7 +296,7 @@ function sortChart(newArray, divID) {
     } else if (divID == "endGame") {
         endGAmeDiv = IDs;
     }
-    updateCharts(0);
+    updateCharts(0, divID);
 }
 
 function scrubData(dirtData) {

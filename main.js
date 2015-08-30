@@ -35,7 +35,6 @@ $(document).ready(function () {
                 var template = "<li id=dropped-" + idd + " class=dropped-" + idd + ">" + ui.draggable.html().toString() + " <div class=remove-item style=float:right >X</div></li>";
                 $("#" + divId + "List").append(template);
                 $(".remove-item").on("click", function () {
-                    //console.log("siblings: " + $(this).parent().siblings());
                     if ($(this).parent().siblings().length == 1) {
                         console.log("ONLY ONE SIB");
                         $(this).parent().parent().find(".placeholder").show();
@@ -61,11 +60,7 @@ $(document).ready(function () {
                 });
             },
             update: function (event, ui) {
-                //console.log("In sortable update!!!! " + $(this));
                 sortChart($(this).sortable('toArray'), divId);
-            },
-            change: function(event, ui){
-                //console.log("Change is happening");
             }
         });
     }
@@ -78,22 +73,22 @@ $(document).ready(function () {
 
     //---------------------------------------------------
     // Start game charts
-    var ctx = $("#div1DmgChart").get(0).getContext("2d");
-    lineChartDmg = new Chart(ctx).Line(dmgData);
-    ctx = $("#div1DefChart").get(0).getContext("2d");
-    lineChartDef = new Chart(ctx).Line(defData);
+    ctx1dmg = $("#div1DmgChart").get(0).getContext("2d");
+    lineChartDmg = new Chart(ctx1dmg).Line(dmgData);
+    ctx1def = $("#div1DefChart").get(0).getContext("2d");
+    lineChartDef = new Chart(ctx1def).Line(defData);
     //---------------------------------------------------
     // Mid game charts
-    ctx = $("#div2DmgChart").get(0).getContext("2d");
-    lineChartDmgdiv2 = new Chart(ctx).Line(dmgData);
-    ctx = $("#div2DefChart").get(0).getContext("2d");
-    lineChartDefdiv2 = new Chart(ctx).Line(defData);
+    ctx2dmg = $("#div2DmgChart").get(0).getContext("2d");
+    lineChartDmgdiv2 = new Chart(ctx2dmg).Line(dmgData);
+    ctx2def = $("#div2DefChart").get(0).getContext("2d");
+    lineChartDefdiv2 = new Chart(ctx2def).Line(defData);
     //---------------------------------------------------
     // End game charts
-    ctx = $("#div3DmgChart").get(0).getContext("2d");
-    lineChartDmgdiv3 = new Chart(ctx).Line(dmgData);
-    ctx = $("#div3DefChart").get(0).getContext("2d");
-    lineChartDefdiv3 = new Chart(ctx).Line(defData);
+    ctx3dmg = $("#div3DmgChart").get(0).getContext("2d");
+    lineChartDmgdiv3 = new Chart(ctx3dmg).Line(dmgData);
+    ctx3def = $("#div3DefChart").get(0).getContext("2d");
+    lineChartDefdiv3 = new Chart(ctx3def).Line(defData);
 
 
     //chart defaults:
@@ -102,3 +97,10 @@ $(document).ready(function () {
         scaleFontColor: "#555"
     };
 });
+
+var ctx1dmg;
+var ctx1def;
+var ctx2dmg;
+var ctx2def;
+var ctx3dmg;
+var ctx3def;
