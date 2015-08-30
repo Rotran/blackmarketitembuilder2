@@ -43,14 +43,12 @@ $(document).ready(function () {
                     $(this).parent().remove();
                     console.log("drop remove");
                     console.log(ui.draggable);
+                    console.log($(this).sortable('toArray'));
                     removeData();
                 });
                 var tooltipId = ".dropped-" + idd;
                 $(".dropped-"+idd).itemTooltip({itemId : idd, divId : tooltipId});
-                //perhaps we have a widget which shows the icon + gold cost??
                 generateDataFromDrop(ui.draggable);
-            //TODO: after we drop, we should add the item
-            // to the list
             }
         }).sortable({
             items: "li:not(.placeholder)",
@@ -59,14 +57,10 @@ $(document).ready(function () {
                 var tooltipId = ".dropped-"+idd;
                 $(this).removeClass("ui-state-default").tooltip({itemId : idd, divId: tooltipId});
             },
-            stop: function(event, ui){
-                sortChart();
-            },
-            change: function(event, ui){
-                console.log("Change happes duuude");
-            },
             update: function(event, ui){
                 console.log("updatedddd");
+                sortChart($(this).sortable('toArray'));
+                console.log($(this));
             }
         });
     }
@@ -80,9 +74,10 @@ $(document).ready(function () {
 
     var ctx = $("#firstChart").get(0).getContext("2d");
 
-    // First chart
+    // First chart for ap and ad
     lineChartDmg = new Chart(ctx).Line(dmgData);
     ctx = $("#secondChart").get(0).getContext("2d");
+    // Second chart for defense and spell block
     lineChartDef = new Chart(ctx).Line(defData);
 
     //chart defaults:

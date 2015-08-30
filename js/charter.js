@@ -1,16 +1,9 @@
 //---------------------------------------------------
 //Functions to implement chart views for stats
 
-function basicChart() {
-    "use strict";
 
-
-}
-
-function lolStuff() {
-
-}
-
+//---------------------------------------------------
+// Data
 var simpleOptions = {
 
     ///Boolean - Whether grid lines are shown across the chart
@@ -59,7 +52,6 @@ var simpleOptions = {
     legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
 
 };
-
 
 var dmgData = {
 
@@ -140,10 +132,6 @@ var orionData = {
     ]
 };
 
-var MyChartView = Backbone.View.extend({
-
-});
-
 // Users will be dropping items into an area and moving them around
 // After each drop, this function should be called to re-do the chart
 // The given charts will need to be defined globaly for this to work
@@ -166,11 +154,15 @@ function generateDataFromDrop(draggedItem) {
     });
 
     var modelDropped = allItems[droppedModelID];
+    addDataToChart(modelDropped);
+    //lineChartDmg.addData([modelDropped.attributes.stats])
+}
 
+function addDataToChart(model) {
     var isdmg = false;
     var isdef = false;
 
-    _.each(modelDropped.attributes.stats, function (value, key) {
+    _.each(model.attributes.stats, function (value, key) {
         if (key == flatphydmg) {
             flatPhyTotals += value;
             isdmg = true;
@@ -191,42 +183,42 @@ function generateDataFromDrop(draggedItem) {
     //flatphydmg += tempphydmg;
     //flatmagdmg += tempmagdmg;
     if (isdmg) {
-        lineChartDmg.addData([flatPhyTotals, flatMagTotals], modelDropped.id);
+        lineChartDmg.addData([flatPhyTotals, flatMagTotals], model.id);
         lineChartDmg.update();
     } else if (isdef) {
-        lineChartDef.addData([flatDefTotals, flatSpellBlockTotals], modelDropped.id);
+        lineChartDef.addData([flatDefTotals, flatSpellBlockTotals], model.id);
         lineChartDef.update();
     }
     console.log("added chart stuff");
     console.log(lineChartDef);
     console.log(lineChartDmg);
-    //lineChartDmg.addData([modelDropped.attributes.stats])
 }
 
-function sortChart() {
-    //Going to need to just parse through all
-    //the dropped items, clear out the chart then add
-    //each data point all over again.
-    //Since it's a resort, we should know which chart
-    //And won't have to do both def and dmg??
-    console.log("We sorted???");
-    console.log(lineChartDmg);
-    _.each(lineChartDef.datasets, function(data){
-        _.each(data.points, function(point){
-           console.log("point:")
-           console.log(point);
-        });
-        console.log("datasets");
-        console.log(data);
+function sortChart(newArray) {
+    // getting an array of ["dropped-1029", "dropped-1006", "dropped-1001"]
+    var IDs = scrubData(newArray);
+    console.log(IDs);
+
+
+}
+
+function scrubData(dirtData) {
+    var dataSet = [];
+    _.each(dirtData, function (data) {
+        dataSet.push(data.substring(8, data.length));
     });
 
+    return dataSet;
 }
 
-function removeData(){
+function removeData() {
     //do something??
     lineChartDef.removeData();
     lineChartDef.update();
 }
+
+//-----------------------------------------------------------------------------
+// Variables
 
 // DataStats to parse out
 var flatphydmg = "FlatPhysicalDamageMod";
@@ -257,5 +249,3 @@ function lineChartDefData() {
 //Global variables for the charts.
 var lineChartDmg;
 var lineChartDef;
-
-var appview = new AppView;
