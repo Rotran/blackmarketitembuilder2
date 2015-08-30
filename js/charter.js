@@ -136,26 +136,73 @@ var orionData = {
 // After each drop, this function should be called to re-do the chart
 // The given charts will need to be defined globaly for this to work
 // After each drop we can just go through and do all the charts for simplicity
-function generateDataFromDrop(draggedItem) {
-    //logic should be done here to dete
-    lineChartDmgData();
-    lineChartDefData();
+function generateDataFromDrop(draggedItem, divID) {
 
-    //lineChartDmg.addData([20, 30], "August");
-    //console.log(lineChartDmg.generateLegend());
     var itemDraggedID = draggedItem.find("img").attr("id");
+
+    if (divID == "startGame") {
+        startGameDiv.push(itemDraggedID);
+    } else if (divID == "midGame") {
+        midGameDiv.push(itemDraggedID);
+    } else if (divID == "endGame") {
+        endGAmeDiv.push(itemDraggedID);
+    }
+    updateCharts();
+
+    //    var droppedModelID = _.findIndex(allItems, function (item) {
+    //        if (item.id == itemDraggedID) {
+    //            return true;
+    //        } else {
+    //            return false;
+    //        }
+    //    });
+    //
+    //    var modelDropped = allItems[droppedModelID];
+    //    addDataToChart(modelDropped);
+    //lineChartDmg.addData([modelDropped.attributes.stats])
+}
+
+function updateCharts() {
+    //Reset the totals
+    flatPhyTotals = 0;
+    flatMagTotals = 0;
+    flatDefTotals = 0;
+    flatSpellBlockTotals = 0;
+    var i;
+    for(i = 0; i < getItemCount(); i++){
+        lineChartDef.removeData();
+        lineChartDmg.removeData();
+        console.log("removing data " + i);
+    }
+
+    //startGAme
+    _.each(startGameDiv, function (id) {
+        addDataToChart(getModel(id));
+    });
+    //midgame:
+    _.each(midGameDiv, function (id) {
+        addDataToChart(getModel(id));
+    });
+    //endGame:
+    _.each(endGAmeDiv, function (id) {
+        addDataToChart(getModel(id));
+    });
+    lineChartDef.update();
+    lineChartDmg.update();
+}
+
+function getModel(itemID) {
+    //The Items:
     var allItems = $("#item-result").itemResults('option', 'allItems');
-    var droppedModelID = _.findIndex(allItems, function (item) {
-        if (item.id == itemDraggedID) {
+
+    var modelid = _.findIndex(allItems, function (item) {
+        if (item.id == itemID) {
             return true;
         } else {
             return false;
         }
     });
-
-    var modelDropped = allItems[droppedModelID];
-    addDataToChart(modelDropped);
-    //lineChartDmg.addData([modelDropped.attributes.stats])
+    return allItems[modelid];
 }
 
 function addDataToChart(model) {
@@ -184,14 +231,9 @@ function addDataToChart(model) {
     //flatmagdmg += tempmagdmg;
     if (isdmg) {
         lineChartDmg.addData([flatPhyTotals, flatMagTotals], model.id);
-        lineChartDmg.update();
     } else if (isdef) {
         lineChartDef.addData([flatDefTotals, flatSpellBlockTotals], model.id);
-        lineChartDef.update();
     }
-    console.log("added chart stuff");
-    console.log(lineChartDef);
-    console.log(lineChartDmg);
 }
 
 function sortChart(newArray) {
@@ -217,35 +259,36 @@ function removeData() {
     lineChartDef.update();
 }
 
+function getItemCount(){
+    var count = 0;
+    count += startGameDiv.length;
+    count += midGameDiv.length;
+    count += endGAmeDiv.length;
+    return count;
+}
+
 //-----------------------------------------------------------------------------
 // Variables
 
-// DataStats to parse out
+//DataStats to parse out
 var flatphydmg = "FlatPhysicalDamageMod";
 var flatmagdmg = "FlatMagicDamageMod";
 var flatDef = "FlatArmorMod";
 var flatSpellBlock = "FlatSpellBlockMod";
 
-//DataAdded
+//DataAdded for totals
 var flatPhyTotals = 0;
 var flatMagTotals = 0;
 var flatDefTotals = 0;
 var flatSpellBlockTotals = 0;
 
-// Charts:
-function lineChartDmgData() {
-    var datasets = [];
-    //Change the datasets
-    //Will returning update? probs not...
-    return datasets;
-}
-
-function lineChartDefData() {
-    var datasets = [];
-    //Change stuff
-    return datasets;
-}
-
-//Global variables for the charts.
+//Global variables
+//The charts:
 var lineChartDmg;
 var lineChartDef;
+
+//The Models within the the divs
+//Data looks like: ["1001", "1003", ...]
+var startGameDiv = new Array;
+var midGameDiv = new Array;
+var endGAmeDiv = new Array;

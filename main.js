@@ -48,7 +48,7 @@ $(document).ready(function () {
                 });
                 var tooltipId = ".dropped-" + idd;
                 $(".dropped-"+idd).itemTooltip({itemId : idd, divId : tooltipId});
-                generateDataFromDrop(ui.draggable);
+                generateDataFromDrop(ui.draggable, divId);
             }
         }).sortable({
             items: "li:not(.placeholder)",
@@ -59,7 +59,7 @@ $(document).ready(function () {
             },
             update: function(event, ui){
                 console.log("updatedddd");
-                sortChart($(this).sortable('toArray'));
+                sortChart($(this).sortable('toArray'), divId);
                 console.log($(this));
             }
         });
@@ -83,6 +83,7 @@ $(document).ready(function () {
     //chart defaults:
     Chart.defaults.global = {
         showScale: true,
-        scaleFontColor: "#555"
+        scaleFontColor: "#555",
+            legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
     };
 });
