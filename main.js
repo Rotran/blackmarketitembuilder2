@@ -40,16 +40,8 @@ $(document).ready(function () {
                         console.log("ONLY ONE SIB");
                         $(this).parent().parent().find(".placeholder").show();
                     }
-                    //console.log("this in clicker " + $(this));
-                    //console.log(event);
-                    //console.log(ui.sortable('toArray'));
-                    //console.log("parent " + $(this).parent());
                     $(this).parent().remove();
                     sortChart($("#" + divId).sortable('toArray'), divId);
-                    //console.log("drop remove");
-                    //console.log(ui.draggable);
-                    //console.log($(this).sortable('toArray'));
-                    //removeData();
                 });
                 var tooltipId = ".dropped-" + idd;
                 $(".dropped-" + idd).itemTooltip({
@@ -84,13 +76,25 @@ $(document).ready(function () {
         createDroppable("endGame");
     });
 
-    var ctx = $("#firstChart").get(0).getContext("2d");
-
-    // First chart for ap and ad
+    //---------------------------------------------------
+    // Start game charts
+    var ctx = $("#div1DmgChart").get(0).getContext("2d");
     lineChartDmg = new Chart(ctx).Line(dmgData);
-    ctx = $("#secondChart").get(0).getContext("2d");
-    // Second chart for defense and spell block
+    ctx = $("#div1DefChart").get(0).getContext("2d");
     lineChartDef = new Chart(ctx).Line(defData);
+    //---------------------------------------------------
+    // Mid game charts
+    ctx = $("#div2DmgChart").get(0).getContext("2d");
+    lineChartDmgdiv2 = new Chart(ctx).Line(dmgData);
+    ctx = $("#div2DefChart").get(0).getContext("2d");
+    lineChartDefdiv2 = new Chart(ctx).Line(defData);
+    //---------------------------------------------------
+    // End game charts
+    ctx = $("#div3DmgChart").get(0).getContext("2d");
+    lineChartDmgdiv3 = new Chart(ctx).Line(dmgData);
+    ctx = $("#div3DefChart").get(0).getContext("2d");
+    lineChartDefdiv3 = new Chart(ctx).Line(defData);
+
 
     //chart defaults:
     Chart.defaults.global = {

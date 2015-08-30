@@ -270,7 +270,7 @@ function getItemCount() {
     return count;
 }
 
-//-----------------------------------------------------------------------------
+//---------------------------------------------------
 // Variables
 
 //DataStats to parse out
@@ -289,6 +289,10 @@ var flatSpellBlockTotals = 0;
 //The charts:
 var lineChartDmg;
 var lineChartDef;
+var lineChartDefdiv2;
+var lineChartDmgdiv2;
+var lineChartDefdiv3;
+var lineChartDmgdiv3;
 
 //The Models within the the divs
 //Data looks like: ["1001", "1003", ...]
