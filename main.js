@@ -84,9 +84,6 @@ $(document).ready(function () {
     // End game charts
     ctx3dmg = $("#div3DmgChart").get(0).getContext("2d");
     lineChartEnd = new Chart(ctx3dmg).Line(endGameData, option);
-    //var legend = lineChartEnd.generateLegend();
-    //$("#header").append(legend);
-    //options:
 });
 
 var ctx1dmg;
