@@ -6,12 +6,12 @@ var ItemModel = Backbone.Model.extend({
     //Skipping a backend object model, we'll do the scrubbing here
     //and add from the fetch result, populate attr we care about.
     url: function () {
-        return 'http://rotran.io:8080/fetchItemById/' + this.id
+        return 'http://blackmarket.rotran.io:8080/fetchItemById/' + this.id
     }
 });
 
 var ItemCollection = Backbone.Collection.extend({
     model : ItemModel,
-    url : 'http://rotran.io:8080/fetchAllItems'
+    url : 'http://blackmarket.rotran.io:8080/fetchAllItems'
 });
 
