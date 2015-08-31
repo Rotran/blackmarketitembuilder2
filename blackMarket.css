@@ -4,8 +4,8 @@ body {
     background-attachment: fixed;
 }
 .logo {
-    display:block;
-    margin:auto;
+    display: block;
+    margin: auto;
 }
 .ui-accordion .ui-accordion-content {
     padding: 0px;
@@ -72,12 +72,15 @@ ol#statsList {
 .mini-info {
     font-size: 12px;
     display: inline-block;
+    background-color: #ffffff;
+    opacity: 0.6;
+    width: 70%;
 }
+
 ul {
     padding: 10px;
 }
-.droppedList{
+.droppedList {
     overflow-y: auto;
     height: 400px;
 }
-
