@@ -237,7 +237,6 @@ function updateCharts(temp, divid) {
             addDataToChart(getModel(id), lineChartStart);
         });
         lineChartStart.update();
-        console.log(lineChartStart.generateLegend());
     }
     //midgame
     if (divid == "midGame") {
