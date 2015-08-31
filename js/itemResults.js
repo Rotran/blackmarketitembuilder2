@@ -7,7 +7,6 @@ $(function () {
         //creating a filtered set that will be used and manipulated
         _filteredItems: [],
         _create: function () {
-            console.log("CREATE");
             //set filtered items to all items initially.
             this._filteredItems = this.options.allItems;
             this._createList();
@@ -21,7 +20,6 @@ $(function () {
             }
         },
         _createDraggableListItem: function (item) {
-            console.log(item);
             var itemAttr = item.attributes;
             var itemURL = "http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/" + itemAttr.image.full;
             var template = "<li dbid="+item.id+" class=items-tooltip-"+item.id+" id=" + item.id +"-listItem><img id=" + item.id +" class=item-icon src=" + itemURL + "><table class=mini-info><tr><td>" + itemAttr.name + "</td></tr><tr><td><img class=gold-coins src=images/gold-coins.gif>" + itemAttr.gold.total + "</td></tr></table></li>";
@@ -31,7 +29,7 @@ $(function () {
                 helper: "clone"
             });
             var divId = ".items-tooltip-"+item.id
-            $(".items-tooltip-"+item.id).itemTooltip({itemId : item.id, divId});
+            $(".items-tooltip-"+item.id).itemTooltip({itemId : item.id, divId : divId});
         },
         getCurrentItems: function () {
             return this._filterDisplayItems;
@@ -93,8 +91,6 @@ $(function () {
             }
 
             this._filteredItems = filteredItems;
-            console.log("FILTERED");
-            console.log(this._filteredItems);
             //empty the current list and redraw it
             $("#item-result-list").empty();
             this._createList();

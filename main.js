@@ -6,7 +6,6 @@ $(document).ready(function () {
 
     itemCollections.fetch({
         success: function (models, response, options) {
-//            console.log("MODELS", models);
             allItems = models.models;
             $("#item-result").itemResults({
                 allItems: allItems
@@ -17,7 +16,6 @@ $(document).ready(function () {
         }
     });
 
-//    console.log("doc ready!");
     $("#filter").load("templates/filter.html", function () {
         $("#filter-accordion").accordion({
             heightStyle: "content"
@@ -36,7 +34,6 @@ $(document).ready(function () {
                 $("#" + divId + "List").append(template);
                 $(".remove-item").on("click", function () {
                     if ($(this).parent().siblings().length == 1) {
-//                        console.log("ONLY ONE SIB");
                         $(this).parent().parent().find(".placeholder").show();
                     }
                     $(this).parent().remove();
