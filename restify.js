@@ -4,9 +4,6 @@ var mongojs = require("mongojs");
 var db = mongojs("blackmarketdb");
 var itemCollection = db.collection("items");
 
-restify.CORS.ALLOW_HEADERS.push('Accept-Encoding');
-restify.CORS.ALLOW_HEADERS.push('Accept-Language');
-
 function fetchItemById(req, res, next) {
     var id = req.params.id;
     itemCollection.find({
@@ -36,7 +33,9 @@ function fetchAllItems(req, res, next) {
     });
 }
 
-restify.CORS.ALLOW_HEADERS.push('authorization');
+restify.CORS.ALLOW_HEADERS.push('Accept-Encoding');
+restify.CORS.ALLOW_HEADERS.push('Accept-Language');
+
 var server = restify.createServer();
 server.use(
     function crossOrigin(req, res, next) {
@@ -45,7 +44,7 @@ server.use(
         return next();
     }
 );
-server.use(restify.CORS());
+server.pre(restify.CORS());
 server.use(restify.fullResponse());
 server.use(restify.acceptParser(server.acceptable));
 server.use(restify.queryParser());
