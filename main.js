@@ -30,7 +30,7 @@ $(document).ready(function () {
             drop: function (event, ui) {
                 $(this).find(".placeholder").hide();
                 var idd = ui.draggable.find("img").attr("id");
-                var template = "<li id=dropped-" + idd + " class=dropped-" + idd + ">" + ui.draggable.html().toString() + " <div class=remove-item style=float:right >X</div></li>";
+                var template = "<li id=dropped-" + idd + " class=dropped-" + idd + ">" + ui.draggable.html().toString() + " <div class=remove-item style=float:right;color:red; >X</div></li>";
                 $("#" + divId + "List").append(template);
                 $(".remove-item").on("click", function () {
                     if ($(this).parent().siblings().length == 1) {
