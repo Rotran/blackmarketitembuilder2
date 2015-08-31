@@ -72,7 +72,7 @@ $(document).ready(function () {
     // Start game charts
     ctx1dmg = $("#div1DmgChart").get(0).getContext("2d");
         var option = {
-        legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></span></li><%}%></ul>"
+        legendTemplate: "<span class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><span><span style=\"background-color:<%=datasets[i].strokeColor%>\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></span></span><%}%></span>"
     };
     lineChartStart = new Chart(ctx1dmg).Line(startGameData, option);
     $("#chartLegend").append(lineChartStart.generateLegend());

@@ -78,15 +78,15 @@ var startGameData = {
         {
             label: "Defense",
             fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(48, 48, 50, 1)",
-            pointColor: "rgba(48, 48, 50, 1)",
+            strokeColor: "rgba(43, 43, 232, 1)",
+            pointColor: "rgba(43, 43, 232, 1)",
             //data: [20, 30, 40, 50, 60]
         },
         {
             label: "Magic Resist",
             fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(108, 48, 77, 1)",
-            pointColor: "rgba(108, 48, 77, 1)",
+            strokeColor: "rgba(43, 213, 44, 1)",
+            pointColor: "rgba(43, 213, 44, 1)",
             //data: [5, 10, 15, 20, 25]
         },
     ]
