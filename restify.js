@@ -1,4 +1,5 @@
 var restify = require('restify');
+var cors = require('cors');
 
 var mongojs = require("mongojs");
 var db = mongojs("blackmarketdb");
@@ -9,11 +10,12 @@ function fetchItemById(req, res, next) {
     itemCollection.find({
         id: parseInt(id)
     }, function (err, response) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "X-Requested-With");
+        res.header("Access-Control-Allow-Methods", "*");
         res.writeHead(200, {
             'Content-Type': 'application/json; charset=utf-8'
         });
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "X-Requested-With");
         res.end(JSON.stringify(response[0]));
     });
     return next();
@@ -22,12 +24,12 @@ function fetchItemById(req, res, next) {
 function fetchAllItems(req, res, next) {
     itemCollection.find(function (err, data) {
         var allItems = JSON.stringify(data);
-
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "X-Requested-With");
+        res.header("Access-Control-Allow-Methods", "*");
         res.writeHead(200, {
             'Content-Type': 'application/json; charset=utf-8'
         });
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "X-Requested-With");
         res.end(allItems);
         return next();
     });
@@ -44,7 +46,9 @@ server.use(
         return next();
     }
 );
+
 server.pre(restify.CORS());
+server.use(cors());
 server.use(restify.fullResponse());
 server.use(restify.acceptParser(server.acceptable));
 server.use(restify.queryParser());
