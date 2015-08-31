@@ -93,3 +93,16 @@ ul {
 .game-content {
     border-radius: 0px 0px 5px 5px;
 }
+stats {
+    color : green;
+}
+consumable {
+    color : darkgoldenrod;
+}
+
+unique {
+    color : gold;
+}
+active {
+    color: gold;
+}
