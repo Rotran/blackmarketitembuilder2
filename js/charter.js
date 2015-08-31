@@ -54,7 +54,10 @@ var simpleOptions = {
 
 };
 
-var dmgData = {
+//TODO: get these to be 6 of them
+//Then modify each set based on div to use the data needed
+
+var startGameData = {
 
     labels: [],
     datasets: [
@@ -72,13 +75,76 @@ var dmgData = {
             pointColor: "rgba(177, 71, 255, 1)",
             //data: [5, 10, 15, 20, 25]
         },
+        {
+            label: "Defense",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(48, 48, 50, 1)",
+            pointColor: "rgba(48, 48, 50, 1)",
+            //data: [20, 30, 40, 50, 60]
+        },
+        {
+            label: "Magic Resist",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(108, 48, 77, 1)",
+            pointColor: "rgba(108, 48, 77, 1)",
+            //data: [5, 10, 15, 20, 25]
+        },
     ]
 };
 
-var defData = {
+var midGameData = {
 
     labels: [],
     datasets: [
+        {
+            label: "AD",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(244, 0, 0, 1)",
+            pointColor: "rgba(244, 0, 0, 1)",
+            //data: [20, 30, 40, 50, 60]
+        },
+        {
+            label: "AP",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(177, 71, 255, 1)",
+            pointColor: "rgba(177, 71, 255, 1)",
+            //data: [5, 10, 15, 20, 25]
+        },
+        {
+            label: "Defense",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(48, 48, 50, 1)",
+            pointColor: "rgba(48, 48, 50, 1)",
+            //data: [20, 30, 40, 50, 60]
+        },
+        {
+            label: "Magic Resist",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(108, 48, 77, 1)",
+            pointColor: "rgba(108, 48, 77, 1)",
+            //data: [5, 10, 15, 20, 25]
+        },
+    ]
+};
+
+var endGameData = {
+
+    labels: [],
+    datasets: [
+        {
+            label: "AD",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(244, 0, 0, 1)",
+            pointColor: "rgba(244, 0, 0, 1)",
+            //data: [20, 30, 40, 50, 60]
+        },
+        {
+            label: "AP",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(177, 71, 255, 1)",
+            pointColor: "rgba(177, 71, 255, 1)",
+            //data: [5, 10, 15, 20, 25]
+        },
         {
             label: "Defense",
             fillColor: "rgba(220,220,220,0.2)",
@@ -161,79 +227,38 @@ function updateCharts(temp, divid) {
     //Add in the new data
     //startGAme
     if (divid == "startGame") {
-        console.log(lineChartDmg.datasets[1].data);
-        //lineChartDef.destroy();
-        //lineChartDmg.destroy();
-//        $('div1DmgChart').remove();
-//        $('#lidiv1dmg').append('<canvas id="div1DmgChart" width="400" height="200"></canvas>');
-//        $('div1DefChart').remove();
-//        $('#lidiv1def').append('<canvas id="div1DefChart" width="400" height="200"></canvas>');
-
-
-        //var ctx = $("#div1DefChart").get(0).getContext("2d");
-        //lineChartDef = new Chart(ctx1def).Line(defData);
-        //ctx = $("#div1DmgChart").get(0).getContext("2d");
-        //lineChartDmg = new Chart(ctx1dmg).Line(dmgData);
-        var deletdef = lineChartDef.datasets[0].points.length;
-        var deletdmg = lineChartDmg.datasets[0].points.length;
-                for (ii = 0; ii < deletdef; ii++) {
-                    //lineChartDef.datasets = [];
-                    lineChartDef.removeData();
-                    //lineChartDef.stop();
-                    //console.log("deleting!!!");
-                }
-                for (ii = 0; ii < deletdmg; ii++) {
-                    //lineChartDmg.datasets = [];
-                    lineChartDmg.removeData();
-                    //lineChartDmg.stop();
-                }
+        var deletdmg = lineChartStart.datasets[0].points.length;
+        for (ii = 0; ii < deletdmg; ii++) {
+            //lineChartDmg.datasets = [];
+            lineChartStart.removeData();
+            //lineChartDmg.stop();
+        }
         _.each(startGameDiv, function (id) {
-            addDataToChart(getModel(id), lineChartDmg, lineChartDef);
+            addDataToChart(getModel(id), lineChartStart);
         });
-        lineChartDef.update();
-        lineChartDmg.update();
+        lineChartStart.update();
     }
     //midgame
     if (divid == "midGame") {
-        console.log(lineChartDmgdiv2.datasets);
-        console.log(lineChartDmgdiv2.datasets[0].points);
-        lineChartDefdiv2.stop();
-        lineChartDmgdiv2.stop();
-        var deletdef = lineChartDefdiv2.datasets[0].points.length;
-        var deletdmg = lineChartDmgdiv2.datasets[0].points.length;
-        for (ii = 0; ii < deletdef; ii++) {
-            lineChartDefdiv2.removeData();
-            //console.log("deleting!!!");
-        }
+        var deletdmg = lineChartMid.datasets[0].points.length;
         for (ii = 0; ii < deletdmg; ii++) {
-            lineChartDmgdiv2.removeData();
+            lineChartMid.removeData();
         }
-
         _.each(midGameDiv, function (id) {
-            addDataToChart(getModel(id), lineChartDmgdiv2, lineChartDefdiv2);
+            addDataToChart(getModel(id), lineChartMid);
         });
-        lineChartDefdiv2.render();
-        lineChartDmgdiv2.render();
-//        lineChartDefdiv2.update();
-//        lineChartDmgdiv2.update();
+        lineChartMid.update();
     }
     //endGame:
     if (divid == "endGame") {
-        var deletdef = lineChartDefdiv3.datasets[0].points.length;
-        var deletdmg = lineChartDmgdiv3.datasets[0].points.length;
-        for (ii = 0; ii < deletdef; ii++) {
-            lineChartDefdiv3.removeData();
-            //console.log("deleting!!!");
-        }
+        var deletdmg = lineChartEnd.datasets[0].points.length;
         for (ii = 0; ii < deletdmg; ii++) {
-            lineChartDmgdiv3.removeData();
+            lineChartEnd.removeData();
         }
-
         _.each(endGAmeDiv, function (id) {
-            addDataToChart(getModel(id), lineChartDmgdiv3, lineChartDefdiv3);
+            addDataToChart(getModel(id), lineChartEnd);
         });
-        lineChartDefdiv3.update();
-        lineChartDmgdiv3.update();
+        lineChartEnd.update();
     }
 }
 
@@ -251,38 +276,31 @@ function getModel(itemID) {
     return allItems[modelid];
 }
 
-function addDataToChart(model, chartdmg, chartdef) {
-    var isdmg = false;
-    var isdef = false;
+function addDataToChart(model, chartdmg) {
 
     _.each(model.attributes.stats, function (value, key) {
         if (key == flatphydmg) {
             flatPhyTotals += value;
-            isdmg = true;
         }
         if (key == flatmagdmg) {
             flatMagTotals += value;
-            isdmg = true;
         }
         if (key == flatDef) {
             flatDefTotals += value;
-            isdef = true;
         }
         if (key == flatSpellBlock) {
             flatSpellBlockTotals += value;
-            isdef = true;
         }
     });
+    //    console.log("image: ");
+    //    console.log(model.get('image'));
+    //    console.log(model.get('image').full);
+    //    console.log(model);
+    var drag = "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/";
     //flatphydmg += tempphydmg;
     //flatmagdmg += tempmagdmg;
-    if (isdmg) {
-        chartdmg.addData([flatPhyTotals, flatMagTotals], model.id);
-        //lineChartDef.update();
-    }
-    if (isdef) {
-        chartdef.addData([flatDefTotals, flatSpellBlockTotals], model.id);
-        //lineChartDmg.update();
-    }
+
+    chartdmg.addData([flatPhyTotals, flatMagTotals, flatDefTotals, flatSpellBlockTotals], model.get('name'));
 }
 
 function sortChart(newArray, divID) {
@@ -340,12 +358,9 @@ var flatSpellBlockTotals = 0;
 
 //Global variables
 //The charts:
-var lineChartDmg;
-var lineChartDef;
-var lineChartDefdiv2;
-var lineChartDmgdiv2;
-var lineChartDefdiv3;
-var lineChartDmgdiv3;
+var lineChartStart;
+var lineChartMid;
+var lineChartEnd;
 
 //The Models within the the divs
 //Data looks like: ["1001", "1003", ...]

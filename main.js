@@ -6,7 +6,7 @@ $(document).ready(function () {
 
     itemCollections.fetch({
         success: function (models, response, options) {
-            console.log("MODELS", models);
+//            console.log("MODELS", models);
             allItems = models.models;
             $("#item-result").itemResults({
                 allItems: allItems
@@ -17,7 +17,7 @@ $(document).ready(function () {
         }
     });
 
-    console.log("doc ready!");
+//    console.log("doc ready!");
     $("#filter").load("templates/filter.html", function () {
         $("#filter-accordion").accordion({
             heightStyle: "content"
@@ -36,7 +36,7 @@ $(document).ready(function () {
                 $("#" + divId + "List").append(template);
                 $(".remove-item").on("click", function () {
                     if ($(this).parent().siblings().length == 1) {
-                        console.log("ONLY ONE SIB");
+//                        console.log("ONLY ONE SIB");
                         $(this).parent().parent().find(".placeholder").show();
                     }
                     $(this).parent().remove();
@@ -74,27 +74,23 @@ $(document).ready(function () {
     //---------------------------------------------------
     // Start game charts
     ctx1dmg = $("#div1DmgChart").get(0).getContext("2d");
-    lineChartDmg = new Chart(ctx1dmg).Line(dmgData);
-    ctx1def = $("#div1DefChart").get(0).getContext("2d");
-    lineChartDef = new Chart(ctx1def).Line(defData);
+    lineChartStart = new Chart(ctx1dmg).Line(startGameData);
     //---------------------------------------------------
     // Mid game charts
     ctx2dmg = $("#div2DmgChart").get(0).getContext("2d");
-    lineChartDmgdiv2 = new Chart(ctx2dmg).Line(dmgData);
-    ctx2def = $("#div2DefChart").get(0).getContext("2d");
-    lineChartDefdiv2 = new Chart(ctx2def).Line(defData);
+    lineChartMid = new Chart(ctx2dmg).Line(midGameData);
     //---------------------------------------------------
     // End game charts
     ctx3dmg = $("#div3DmgChart").get(0).getContext("2d");
-    lineChartDmgdiv3 = new Chart(ctx3dmg).Line(dmgData);
-    ctx3def = $("#div3DefChart").get(0).getContext("2d");
-    lineChartDefdiv3 = new Chart(ctx3def).Line(defData);
+    lineChartEnd = new Chart(ctx3dmg).Line(endGameData);
 
 
     //chart defaults:
     Chart.defaults.global = {
         showScale: true,
-        scaleFontColor: "#555"
+        scaleFontColor: "#154",
+        scaleShowLabels: false,
+        animation: false
     };
 });
 
