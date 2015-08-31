@@ -31,7 +31,7 @@ $(function () {
                 helper: "clone"
             });
             var divId = ".items-tooltip-"+item.id
-            $(".items-tooltip-"+item.id).itemTooltip({itemId : item.id, divId});
+            $(".items-tooltip-"+item.id).itemTooltip({itemId : item.id, divId : divId});
         },
         getCurrentItems: function () {
             return this._filterDisplayItems;

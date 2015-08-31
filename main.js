@@ -6,7 +6,6 @@ $(document).ready(function () {
 
     itemCollections.fetch({
         success: function (models, response, options) {
-            console.log("MODELS", models);
             allItems = models.models;
             $("#item-result").itemResults({
                 allItems: allItems
