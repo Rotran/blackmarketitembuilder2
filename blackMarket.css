@@ -106,3 +106,7 @@ unique {
 active {
     color: gold;
 }
+.ui-tooltip{
+    font-size: 12px;
+    font-family: serif;
+}
