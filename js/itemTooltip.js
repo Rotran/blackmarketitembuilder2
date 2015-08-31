@@ -21,8 +21,6 @@ $(function () {
         _createTooltip: function (currentItem) {
             var description = currentItem.attributes.description;
             var id = this.options.itemId;
-            console.log("create tooltimp");
-            console.log(this.options.divId);
             $(this.options.divId).tooltip({
                 items: this.options.divId,
                 content: description,
