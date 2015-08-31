@@ -71,7 +71,11 @@ $(document).ready(function () {
     //---------------------------------------------------
     // Start game charts
     ctx1dmg = $("#div1DmgChart").get(0).getContext("2d");
-    lineChartStart = new Chart(ctx1dmg).Line(startGameData);
+        var option = {
+        legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></span></li><%}%></ul>"
+    };
+    lineChartStart = new Chart(ctx1dmg).Line(startGameData, option);
+    $("#chartLegend").append(lineChartStart.generateLegend());
     //---------------------------------------------------
     // Mid game charts
     ctx2dmg = $("#div2DmgChart").get(0).getContext("2d");
@@ -79,16 +83,10 @@ $(document).ready(function () {
     //---------------------------------------------------
     // End game charts
     ctx3dmg = $("#div3DmgChart").get(0).getContext("2d");
-    lineChartEnd = new Chart(ctx3dmg).Line(endGameData);
-
-
-    //chart defaults:
-    Chart.defaults.global = {
-        showScale: true,
-        scaleFontColor: "#154",
-        scaleShowLabels: false,
-        animation: false
-    };
+    lineChartEnd = new Chart(ctx3dmg).Line(endGameData, option);
+    //var legend = lineChartEnd.generateLegend();
+    //$("#header").append(legend);
+    //options:
 });
 
 var ctx1dmg;
