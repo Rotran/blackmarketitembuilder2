@@ -4,6 +4,9 @@ var mongojs = require("mongojs");
 var db = mongojs("blackmarketdb");
 var itemCollection = db.collection("items");
 
+restify.CORS.ALLOW_HEADERS.push('Accept-Encoding');
+restify.CORS.ALLOW_HEADERS.push('Accept-Language');
+
 function fetchItemById(req, res, next) {
     var id = req.params.id;
     itemCollection.find({
