@@ -79,7 +79,7 @@ $(document).ready(function () {
     //---------------------------------------------------
     // Mid game charts
     ctx2dmg = $("#div2DmgChart").get(0).getContext("2d");
-    lineChartMid = new Chart(ctx2dmg).Line(midGameData);
+    lineChartMid = new Chart(ctx2dmg).Line(midGameData, option);
     //---------------------------------------------------
     // End game charts
     ctx3dmg = $("#div3DmgChart").get(0).getContext("2d");
