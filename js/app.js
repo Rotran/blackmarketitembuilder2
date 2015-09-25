@@ -16,6 +16,6 @@ require.config({
 require([
     'main',
 ], function(Main){
-    //we need to reformat main to have an initialize function so we can do:
+    //we need to reformat main to have an initialize function so we can do
     ////Main.initialize();
 });
