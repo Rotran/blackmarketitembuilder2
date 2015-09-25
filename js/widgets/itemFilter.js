@@ -1,4 +1,4 @@
-$(function () {
+define(["jquery", "underscore", "jqueryui"], function ($, _) {
     //This widget will be doing logical ANDS with the tags in the list
     $.widget("blackmarket.filterItems", {
         _filters: [],

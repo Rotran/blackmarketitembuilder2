@@ -1,3 +1,5 @@
+define(['backbone'],function(Backbone){
+
 /*
 This does not work in chrome because it does not like the 127.0.0.1
 or the localhost url root and will throw an error.
@@ -10,8 +12,6 @@ var ItemModel = Backbone.Model.extend({
     }
 });
 
-var ItemCollection = Backbone.Collection.extend({
-    model : ItemModel,
-    url : 'http://blackmarket.rotran.io:8080/fetchAllItems'
-});
+return ItemModel;
 
+});

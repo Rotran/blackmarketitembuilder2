@@ -1,4 +1,4 @@
-$(function () {
+define(['jquery', 'underscore', 'jqueryui'], function ($, _) {
     $.widget("blackMarket.itemResults", {
         options: {
             //Defaults to all items, this should never be changed
@@ -22,14 +22,17 @@ $(function () {
         _createDraggableListItem: function (item) {
             var itemAttr = item.attributes;
             var itemURL = "http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/" + itemAttr.image.full;
-            var template = "<li dbid="+item.id+" class=items-tooltip-"+item.id+" id=" + item.id +"-listItem><img id=" + item.id +" class=item-icon src=" + itemURL + "><table class=mini-info><tr><td><div style=max-width:150px;>" + itemAttr.name + "</div></td></tr><tr><td><img class=gold-coins src=images/gold-coins.gif><div>" + itemAttr.gold.total + "</div></td></tr></table></li>";
+            var template = "<li dbid=" + item.id + " class=items-tooltip-" + item.id + " id=" + item.id + "-listItem><img id=" + item.id + " class=item-icon src=" + itemURL + "><table class=mini-info><tr><td><div style=max-width:150px;>" + itemAttr.name + "</div></td></tr><tr><td><img class=gold-coins src=images/gold-coins.gif><div>" + itemAttr.gold.total + "</div></td></tr></table></li>";
 
             $("#item-result-list").append(template);
-            $("#" + item.id+"-listItem").draggable({
+            $("#" + item.id + "-listItem").draggable({
                 helper: "clone"
             });
-            var divId = ".items-tooltip-"+item.id
-            $(".items-tooltip-"+item.id).itemTooltip({itemId : item.id, divId : divId});
+            var divId = ".items-tooltip-" + item.id
+            $(".items-tooltip-" + item.id).itemTooltip({
+                itemId: item.id,
+                divId: divId
+            });
         },
         getCurrentItems: function () {
             return this._filterDisplayItems;

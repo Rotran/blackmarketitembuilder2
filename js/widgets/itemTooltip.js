@@ -1,8 +1,9 @@
-$(function () {
+define(['jquery', 'underscore', 'jqueryui'], function ($, _) {
+
     $.widget("blackmarket.itemTooltip", {
         options: {
             itemId: undefined,
-            divId : undefined
+            divId: undefined
         },
         _create: function () {
             var allItems = $("#item-result").itemResults("option", "allItems");
@@ -24,8 +25,13 @@ $(function () {
             $(this.options.divId).tooltip({
                 items: this.options.divId,
                 content: description,
-                position : { my: "left+15 center", at: "right center", collision : "flip" }
+                position: {
+                    my: "left+15 center",
+                    at: "right center",
+                    collision: "flip"
+                }
             });
         }
     });
+
 });

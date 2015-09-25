@@ -1,4 +1,5 @@
-$(function () {
+define(['jquery', 'underscore', 'jqueryui'], function ($, _) {
+
     $.widget("blackmarket.itemSearch", {
         _create: function () {
             var itemSearch = this;
@@ -22,4 +23,5 @@ $(function () {
             $(".filter-option-reset").prop("checked", false);
         }
     });
+
 });
