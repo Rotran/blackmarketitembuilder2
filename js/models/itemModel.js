@@ -11,7 +11,7 @@ define(['backbone'], function (Backbone)
         //and add from the fetch result, populate attr we care about.
         url: function ()
         {
-            return window.location.hostname + ':8080/fetchItemById/' + this.id
+            return 'http://' + window.location.hostname + ':8080/fetchItemById/' + this.id
         }
     });
 
