@@ -57,19 +57,10 @@ server.use(restify.bodyParser());
 server.get('/fetchItemById/:id', fetchItemById);
 server.get('/fetchAllItems', fetchAllItems);
 
-server.get('/', function indexHTML(req, res, next) {
-    fs.readFile( 'blackmarket/BlackMarketItemBuilder2/index.html', function (err, data) {
-        if (err) {
-            next(err);
-            return;
-        }
-
-        res.setHeader('Content-Type', 'text/html');
-        res.writeHead(200);
-        res.end(data);
-        next();
-    });
-});
+server.get('/', restify.serveStatic({
+    directory: '/home/blackmarket/BlackMarketItemBuild2',
+    default: 'index.html'
+}));
 
 server.listen(80, function () {
     console.log('%s listening at %s', server.name, server.url);
