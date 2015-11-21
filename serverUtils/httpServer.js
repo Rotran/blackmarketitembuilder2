@@ -57,7 +57,7 @@ server.use(restify.bodyParser());
 server.get('/fetchItemById/:id', fetchItemById);
 server.get('/fetchAllItems', fetchAllItems);
 
-server.get('/', restify.serveStatic({
+server.get(/\/docs\/public\/?.*/, restify.serveStatic({
     directory: '/home/blackmarket/BlackMarketItemBuild2',
     default: 'index.html'
 }));
