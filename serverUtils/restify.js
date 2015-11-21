@@ -57,6 +57,11 @@ server.use(restify.bodyParser());
 server.get('/fetchItemById/:id', fetchItemById);
 server.get('/fetchAllItems', fetchAllItems);
 
-server.listen(8080, function () {
+server.get(/.*/, restify.serveStatic({
+   'directory' : '../.',
+   'default' : 'index.html'
+}));
+
+server.listen(80, function () {
     console.log('%s listening at %s', server.name, server.url);
 });
