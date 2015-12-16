@@ -4,6 +4,7 @@ var cors = require('cors');
 var mongojs = require("mongojs");
 var db = mongojs("blackmarketdb");
 var itemCollection = db.collection("items");
+var ddragonVersion = db.collection("ddragonVersion");
 
 function fetchItemById(req, res, next) {
     var id = req.params.id;
@@ -35,6 +36,21 @@ function fetchAllItems(req, res, next) {
     });
 }
 
+function getLatestDDragonVersion(req, res, next) {
+    var latestVersion = ddragonVersion.find(function (err, data) {
+        var latestVer = JSON.stringify(data);
+        console.log();
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "X-Requested-With");
+        res.header("Access-Control-Allow-Methods", "*");
+        res.writeHead(200, {
+            'Content-Type': 'application/json; charset=utf-8'
+        });
+        res.end(data);
+        return next();
+    });
+}
+
 restify.CORS.ALLOW_HEADERS.push('Accept-Encoding');
 restify.CORS.ALLOW_HEADERS.push('Accept-Language');
 
@@ -56,10 +72,11 @@ server.use(restify.bodyParser());
 
 server.get('/fetchItemById/:id', fetchItemById);
 server.get('/fetchAllItems', fetchAllItems);
+server.get('/getLatestDDragonVersion', getLatestDDragonVersion);
 
 server.get(/.*/, restify.serveStatic({
-   'directory' : '../.',
-   'default' : 'index.html'
+    'directory': '../.',
+    'default': 'index.html'
 }));
 
 server.listen(80, function () {
