@@ -87,13 +87,8 @@ define(['models/itemCollection', 'models/itemModel', 'jquery', 'chartjs', 'jquer
         ctx3dmg = $("#div3DmgChart").get(0).getContext("2d");
         lineChartEnd = new Chart(ctx3dmg).Line(endGameData, option);
     });
-
-    var ctx1dmg;
-    var ctx1def;
-    var ctx2dmg;
-    var ctx2def;
-    var ctx3dmg;
-    var ctx3def;
-
-
 });
+
+var ctx1dmg;
+var ctx2dmg;
+var ctx3dmg;
