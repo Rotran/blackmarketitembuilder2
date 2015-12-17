@@ -43,7 +43,7 @@ allDirectives.updateDataDragon = function (key) {
 /*this is how to save to mongo db*/
 allDirectives.saveItem = function (params) {
     if (params != undefined) {
-        itemCollection.save({params}, function (err, saved) {
+        itemCollection.save(params, function (err, saved) {
             if (err || !saved) {
                 console.log("SAVE FAILED");
             } else {
