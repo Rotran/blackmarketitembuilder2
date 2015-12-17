@@ -21,7 +21,10 @@ allDirectives.updateDataDragon = function (key) {
         for (var v = 0; v < versions.length; v++) {
             (function (v) {
                 console.log(v);
-                var version = { name : v, version : Number(v)};
+                var version = {
+                    name: v,
+                    version: Number(v)
+                };
                 ddragonVersion.save(version,
                     function (err, saved) {
                         if (err || !saved) {
@@ -40,14 +43,7 @@ allDirectives.updateDataDragon = function (key) {
 /*this is how to save to mongo db*/
 allDirectives.saveItem = function (params) {
     if (params != undefined) {
-        itemCollection.save({
-            _id: 1,
-            name: "testItem",
-            stat: {
-                ap: 2,
-                ad: 3
-            }
-        }, function (err, saved) {
+        itemCollection.save({params}, function (err, saved) {
             if (err || !saved) {
                 console.log("SAVE FAILED");
             } else {
@@ -78,20 +74,10 @@ allDirectives.populateMongo = function (key) {
 
         var items = JSON.parse(body);
         var parsedItems = items.data;
-        var length = 0;
         for (var key in parsedItems) {
-            (function (i) {
-                itemCollection.save(i,
-                    function (err, saved) {
-                        if (err || !saved) {
-                            console.log("SAVE FAILED", err);
-                        }
-                    });
-            })(parsedItems[key]);
+            allDirectives.saveItem(parsedItems[key])
         }
         console.log("DONE");
-        process.exit();
-        console.log(length);
     }).on("error", function (e) {
         console.log("Got error, " + e.message);
     });
@@ -113,7 +99,7 @@ var schema = {
 prompt.get(schema, function (err, result) {
     var key = result.key;
     if (result.directive == "populateMongo" || result.directive == "updateDataDragon") {
-        console.log("DIRECTIVE RESULT",result['directive']);
+        console.log("DIRECTIVE RESULT", result['directive']);
         var dir = result['directive'];
         allDirectives[dir](key);
     } else {
