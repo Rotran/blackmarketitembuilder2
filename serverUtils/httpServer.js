@@ -1,6 +1,6 @@
 var restify = require('restify');
 var cors = require('cors');
-
+var prompt = require('prompt');
 var mongojs = require("mongojs");
 var db = mongojs("blackmarketdb");
 var itemCollection = db.collection("items");
@@ -79,6 +79,13 @@ server.get(/.*/, restify.serveStatic({
     'default': 'index.html'
 }));
 
-server.listen(80, function () {
-    console.log('%s listening at %s', server.name, server.url);
+prompt.start();
+var port = 80;
+prompt.get(['mode'], function (err, result) {
+    if (result.mode === 'dev') {
+        port = 8080;
+    }
+    server.listen(port, function () {
+        console.log('%s listening at %s', server.name, server.url);
+    });
 });
